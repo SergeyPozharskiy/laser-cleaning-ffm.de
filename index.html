@@ -46,7 +46,7 @@
   .services { padding: 5rem 3rem; }
   .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--laser); margin-bottom: 0.75rem; }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 4vw, 44px); letter-spacing: 1px; margin-bottom: 3rem; color: #fff; }
-  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); }
   .service-card { background: var(--dark); padding: 2rem 1.75rem; transition: background 0.2s; position: relative; overflow: hidden; }
   .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--laser); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
   .service-card:hover { background: var(--mid); }
@@ -101,16 +101,56 @@
   .footer-logo span { color: var(--laser); }
   footer p { font-size: 12px; color: var(--muted); }
 
+  .contact-section { padding: 5rem 3rem; background: var(--mid); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+  .contact-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .contact-icon { width: 44px; height: 44px; background: rgba(255,75,31,0.1); border: 0.5px solid var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 18px; height: 18px; }
+  .contact-item-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--laser); margin-bottom: 4px; }
+  .contact-item-value { font-size: 15px; color: var(--text); }
+  .contact-item-value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+  .contact-item-value a:hover { color: var(--laser); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .form-field input, .form-field textarea { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.12); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 0.75rem 1rem; border-radius: 2px; outline: none; transition: border-color 0.2s; resize: none; }
+  .form-field input:focus, .form-field textarea:focus { border-color: rgba(255,75,31,0.5); }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-submit { margin-top: 0.5rem; }
+  .form-note { font-size: 12px; color: var(--muted); margin-top: 0.75rem; }
+
+  .process { padding: 5rem 3rem; background: var(--mid); }
+  .process-inner { max-width: 1100px; margin: 0 auto; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); margin-bottom: 4rem; }
+  .process-step { background: var(--mid); padding: 2rem 1.75rem; position: relative; overflow: hidden; transition: background 0.2s; }
+  .process-step:hover { background: #222; }
+  .process-step::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--laser); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .process-step:hover::after { transform: scaleX(1); }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--laser); opacity: 0.15; line-height: 1; margin-bottom: 1rem; transition: opacity 0.2s; }
+  .process-step:hover .step-num { opacity: 0.28; }
+  .step-title { font-weight: 500; font-size: 15px; color: #fff; margin-bottom: 0.5rem; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .video-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--laser); margin-bottom: 1.25rem; }
+  .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); border-radius: 2px; }
+  .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
   @media (max-width: 700px) {
     nav { padding: 1rem 1.25rem; }
     .nav-links { display: none; }
     .hero { padding: 4rem 1.25rem 3rem; }
     .hero-stats { gap: 1.5rem; }
-    .services, .why, .certs, .cta-section { padding: 3rem 1.25rem; }
+    .services, .why, .process, .certs, .cta-section, .contact-section { padding: 3rem 1.25rem; }
     .why-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
     .certs-header { flex-direction: column; align-items: flex-start; }
     footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
     .laser-line { margin: 0 1.25rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -120,10 +160,10 @@
   <div class="logo">LASER<span>CLEANING</span></div>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a data-key="nav_services">Services</a></li>
-      <li><a data-key="nav_process">Process</a></li>
+      <li><a href="#services" data-key="nav_services">Services</a></li>
+      <li><a href="#process" data-key="nav_process">Process</a></li>
       <li><a data-key="nav_projects">Projects</a></li>
-      <li><a data-key="nav_contact">Contact</a></li>
+      <li><a href="#contact" data-key="nav_contact">Contact</a></li>
     </ul>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -151,7 +191,7 @@
 
 <div class="laser-line"></div>
 
-<section class="services">
+<section class="services" id="services">
   <div class="section-label" data-key="services_label">What We Remove</div>
   <div class="section-title" data-key="services_title">Our Services</div>
   <div class="services-grid">
@@ -185,10 +225,55 @@
       <div class="service-name" data-key="s6_name">Wood Cleaning</div>
       <div class="service-desc" data-key="s6_desc">Gentle laser restoration of timber — removes stains, char, and weathering without fibre damage.</div>
     </div>
-    <div class="service-card" style="grid-column: span 2;">
+    <div class="service-card">
       <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><path d="M12 20 Q16 14 20 18 Q24 22 28 16" stroke="#FF4B1F" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#FF4B1F" fill-opacity="0.2"/></svg>
       <div class="service-name" data-key="s7_name">Graffiti Removal</div>
       <div class="service-desc" data-key="s7_desc">Fast, residue-free graffiti cleaning on brick, concrete, metal, and stone. Surface integrity fully preserved.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><rect x="10" y="17" width="20" height="9" rx="1" fill="#FF4B1F" fill-opacity="0.1" stroke="#FF4B1F" stroke-width="1"/><line x1="14" y1="17" x2="14" y2="26" stroke="#FF4B1F" stroke-width="0.75" opacity="0.5"/><line x1="18" y1="17" x2="18" y2="26" stroke="#FF4B1F" stroke-width="0.75" opacity="0.5"/><line x1="22" y1="17" x2="22" y2="26" stroke="#FF4B1F" stroke-width="0.75" opacity="0.5"/><line x1="26" y1="17" x2="26" y2="26" stroke="#FF4B1F" stroke-width="0.75" opacity="0.5"/><path d="M10 14 L20 11 L30 14" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="service-name" data-key="s8_name">Metal Cleaning</div>
+      <div class="service-desc" data-key="s8_desc">Thorough laser cleaning of steel, aluminium, and cast metal components. Removes scale, corrosion, and coatings without affecting tolerances.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><rect x="11" y="13" width="8" height="5" rx="0.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="0.75"/><rect x="21" y="13" width="8" height="5" rx="0.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="0.75"/><rect x="15" y="20" width="8" height="5" rx="0.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="0.75"/><rect x="25" y="20" width="4" height="5" rx="0.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="0.75"/><rect x="11" y="20" width="2.5" height="5" rx="0.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="0.75"/></svg>
+      <div class="service-name" data-key="s9_name">Stone Restoration</div>
+      <div class="service-desc" data-key="s9_desc">Gentle, non-abrasive laser cleaning of natural stone facades, monuments, and sculptures. Removes soiling and biological growth with precision.</div>
+    </div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="section-label" data-key="process_label">How It Works</div>
+    <h2 class="section-title" data-key="process_title">The Laser Cleaning Process</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-key="p1_title">Surface Assessment</div>
+        <div class="step-desc" data-key="p1_desc">Our technician inspects the surface, identifies contamination type and depth, and selects optimal laser parameters for the material.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-key="p2_title">Laser Application</div>
+        <div class="step-desc" data-key="p2_desc">Concentrated short laser pulses are directed precisely at the contaminated layer. No masking, no solvents — only light.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-key="p3_title">Vaporisation</div>
+        <div class="step-desc" data-key="p3_desc">Microexplosions at the surface instantly vaporise contaminants layer by layer. The substrate beneath remains completely untouched.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-title" data-key="p4_title">Extraction &amp; Result</div>
+        <div class="step-desc" data-key="p4_desc">Vaporised particles are captured by an integrated extraction system. The result: a pore-deep clean surface with zero residue or secondary waste.</div>
+      </div>
+    </div>
+    <div class="video-label" data-key="process_video_label">See It In Action</div>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/078v2jLQTt0" title="How Laser Cleaning Works" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -270,8 +355,76 @@
   <div class="section-label" data-key="cta_label">Get Started</div>
   <h2 data-key="cta_h2_html">Ready to Restore<br>Your Surfaces?</h2>
   <p data-key="cta_p">Request a free on-site assessment. We'll evaluate the job and provide a transparent quote within 24 hours.</p>
-  <button class="btn-primary" style="font-size:15px;padding:1rem 2.5rem;" data-key="cta_btn">Request Free Assessment</button>
-  <span class="cta-phone">+49 123 456 7890</span>
+  <a href="mailto:info@laser-cleaning-ffm.de?subject=New%20Assessment%20Request"><button class="btn-primary" style="font-size:15px;padding:1rem 2.5rem;" data-key="cta_btn">Request Free Assessment</button></a>
+  <span class="cta-phone">+49 069 943 22 072</span>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label" data-key="contact_label">Contact</div>
+    <h2 class="section-title" data-key="contact_title">Get In Touch</h2>
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label" data-key="contact_email_label">Email</div>
+            <div class="contact-item-value"><a href="mailto:info@laser-cleaning-ffm.de">info@laser-cleaning-ffm.de</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label" data-key="contact_phone_label">Phone</div>
+            <div class="contact-item-value"><a href="tel:+4906994322072">+49 069 943 22 072</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label" data-key="contact_location_label">Location</div>
+            <div class="contact-item-value">Frankfurt, Germany</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-key="form_name_label">Name</label>
+            <input type="text" id="form-name" data-key-placeholder="form_name_placeholder" placeholder="Your name" required>
+          </div>
+          <div class="form-field">
+            <label data-key="form_email_label">Email</label>
+            <input type="email" id="form-email" data-key-placeholder="form_email_placeholder" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-key="form_phone_label">Phone <span style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0" data-key="form_optional">(optional)</span></label>
+          <input type="tel" id="form-phone" data-key-placeholder="form_phone_placeholder" placeholder="+49 ...">
+        </div>
+        <div class="form-field">
+          <label data-key="form_message_label">Message</label>
+          <textarea id="form-message" rows="5" data-key-placeholder="form_message_placeholder" placeholder="Describe your project..." required></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-primary" style="font-size:14px;padding:0.85rem 2rem;" data-key="form_submit">Send Message</button>
+        </div>
+        <p class="form-note" data-key="form_note">Submitting will open your email client with your message pre-filled.</p>
+        <p class="form-note" data-key="form_attach_note">If needed, please attach any photos or videos directly in your email client.</p>
+      </form>
+
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -297,6 +450,14 @@ const translations = {
     s5_name:"Mold Cleaning",s5_desc:"Safe mold and biofilm elimination on any surface, residential or industrial.",
     s6_name:"Wood Cleaning",s6_desc:"Gentle laser restoration of timber — removes stains, char, and weathering without fibre damage.",
     s7_name:"Graffiti Removal",s7_desc:"Fast, residue-free graffiti cleaning on brick, concrete, metal, and stone. Surface integrity fully preserved.",
+    s8_name:"Metal Cleaning",s8_desc:"Thorough laser cleaning of steel, aluminium, and cast metal components. Removes scale, corrosion, and coatings without affecting tolerances.",
+    s9_name:"Stone Restoration",s9_desc:"Gentle, non-abrasive laser cleaning of natural stone facades, monuments, and sculptures. Removes soiling and biological growth with precision.",
+    process_label:"How It Works",process_title:"The Laser Cleaning Process",
+    p1_title:"Surface Assessment",p1_desc:"Our technician inspects the surface, identifies contamination type and depth, and selects optimal laser parameters for the material.",
+    p2_title:"Laser Application",p2_desc:"Concentrated short laser pulses are directed precisely at the contaminated layer. No masking, no solvents — only light.",
+    p3_title:"Vaporisation",p3_desc:"Microexplosions at the surface instantly vaporise contaminants layer by layer. The substrate beneath remains completely untouched.",
+    p4_title:"Extraction & Result",p4_desc:"Vaporised particles are captured by an integrated extraction system. The result: a pore-deep clean surface with zero residue or secondary waste.",
+    process_video_label:"See It In Action",
     why_label:"Why Laser",why_title_html:"Precision that<br>protects surfaces",
     w1_title:"No chemicals or abrasives",w1_text:"Eco-friendly process with no hazardous waste disposal needed.",
     w2_title:"Substrate-safe",w2_text:"Selective ablation removes only target material. Base material remains pristine.",
@@ -314,7 +475,15 @@ const translations = {
     cert_verify:"Request Documents",
     cta_label:"Get Started",cta_h2_html:"Ready to Restore<br>Your Surfaces?",
     cta_p:"Request a free on-site assessment. We'll evaluate the job and provide a transparent quote within 24 hours.",
-    cta_btn:"Request Free Assessment",footer_copy:"© 2026 LaserCleaning. All rights reserved."
+    cta_btn:"Request Free Assessment",footer_copy:"© 2026 LaserCleaning. All rights reserved.",
+    contact_label:"Contact",contact_title:"Get In Touch",
+    contact_email_label:"Email",contact_phone_label:"Phone",contact_location_label:"Location",
+    form_name_label:"Name",form_name_placeholder:"Your name",
+    form_email_label:"Email",form_email_placeholder:"your@email.com",
+    form_phone_label:"Phone",form_phone_placeholder:"+49 ...",form_optional:"(optional)",
+    form_message_label:"Message",form_message_placeholder:"Describe your project...",
+    form_submit:"Send Message",form_note:"Submitting will open your email client with your message pre-filled.",
+    form_attach_note:"If needed, please attach any photos or videos directly in your email client."
   },
   de: {
     nav_services:"Leistungen",nav_process:"Verfahren",nav_projects:"Projekte",nav_contact:"Kontakt",nav_quote:"Angebot anfragen",
@@ -331,6 +500,14 @@ const translations = {
     s5_name:"Schimmelreinigung",s5_desc:"Sichere Schimmel- und Biofilmelimination auf allen Oberflächen — privat oder industriell.",
     s6_name:"Holzreinigung",s6_desc:"Schonende Laserrestaurierung von Holz — entfernt Flecken, Verkohlungen und Witterungsschäden ohne Faserschäden.",
     s7_name:"Graffitibeseitigung",s7_desc:"Schnelle, rückstandsfreie Graffitibeseitigung auf Ziegel, Beton, Metall und Stein. Oberfläche vollständig erhalten.",
+    s8_name:"Metallreinigung",s8_desc:"Gründliche Laserreinigung von Stahl-, Aluminium- und Gussmetallbauteilen. Entfernt Zunder, Korrosion und Beschichtungen ohne Maßhaltigkeitsverlust.",
+    s9_name:"Steinrestaurierung",s9_desc:"Schonende, abriebfreie Laserreinigung von Natursteinfassaden, Denkmälern und Skulpturen. Entfernt Verschmutzungen und biologischen Bewuchs präzise.",
+    process_label:"So funktioniert es",process_title:"Der Laserreinigungsprozess",
+    p1_title:"Oberflächenbewertung",p1_desc:"Unser Techniker prüft die Oberfläche, identifiziert Art und Tiefe der Verschmutzung und wählt die optimalen Laserparameter für das Material.",
+    p2_title:"Laserapplikation",p2_desc:"Konzentrierte kurze Laserpulse werden präzise auf die Verschmutzungsschicht gerichtet. Keine Maskierung, keine Lösungsmittel — nur Licht.",
+    p3_title:"Verdampfung",p3_desc:"Mikroexplosionen an der Oberfläche verdampfen Verunreinigungen schichtweise sofort. Das darunter liegende Substrat bleibt völlig unberührt.",
+    p4_title:"Absaugung & Ergebnis",p4_desc:"Verdampfte Partikel werden von einem integrierten Absaugsystem erfasst. Das Ergebnis: eine porentief reine Oberfläche ohne Rückstände oder Sekundärabfall.",
+    process_video_label:"Erleben Sie es live",
     why_label:"Warum Laser",why_title_html:"Präzision, die<br>Oberflächen schützt",
     w1_title:"Ohne Chemikalien oder Schleifmittel",w1_text:"Umweltfreundlicher Prozess ohne gefährliche Abfallentsorgung.",
     w2_title:"Substratschonend",w2_text:"Selektive Ablation entfernt nur das Zielmaterial. Das Grundmaterial bleibt makellos.",
@@ -348,7 +525,15 @@ const translations = {
     cert_verify:"Dokumente anfordern",
     cta_label:"Jetzt starten",cta_h2_html:"Bereit für makellose<br>Oberflächen?",
     cta_p:"Fordern Sie eine kostenlose Vor-Ort-Bewertung an. Wir prüfen den Auftrag und liefern innerhalb von 24 Stunden ein transparentes Angebot.",
-    cta_btn:"Kostenlose Bewertung anfragen",footer_copy:"© 2026 LaserCleaning. Alle Rechte vorbehalten."
+    cta_btn:"Kostenlose Bewertung anfragen",footer_copy:"© 2026 LaserCleaning. Alle Rechte vorbehalten.",
+    contact_label:"Kontakt",contact_title:"Kontaktieren Sie uns",
+    contact_email_label:"E-Mail",contact_phone_label:"Telefon",contact_location_label:"Standort",
+    form_name_label:"Name",form_name_placeholder:"Ihr Name",
+    form_email_label:"E-Mail",form_email_placeholder:"ihre@email.de",
+    form_phone_label:"Telefon",form_phone_placeholder:"+49 ...",form_optional:"(optional)",
+    form_message_label:"Nachricht",form_message_placeholder:"Beschreiben Sie Ihr Projekt...",
+    form_submit:"Nachricht senden",form_note:"Beim Absenden öffnet sich Ihr E-Mail-Programm mit der vorausgefüllten Nachricht.",
+    form_attach_note:"Falls erforderlich, hängen Sie bitte Fotos oder Videos direkt in Ihrem E-Mail-Programm an."
   }
 };
 
@@ -361,10 +546,36 @@ function setLang(lang) {
       else el.textContent = t[key];
     }
   });
+  document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-key-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
   document.documentElement.lang = lang;
+}
+
+function submitContactForm(e) {
+  e.preventDefault();
+  const name    = document.getElementById('form-name').value.trim();
+  const email   = document.getElementById('form-email').value.trim();
+  const phone   = document.getElementById('form-phone').value.trim();
+  const message = document.getElementById('form-message').value.trim();
+  const lang    = document.documentElement.lang || 'en';
+  const attachNote = translations[lang] && translations[lang].form_attach_note || translations.en.form_attach_note;
+  const body = [
+    'Name: ' + name,
+    'Email: ' + email,
+    phone ? 'Phone: ' + phone : '',
+    '',
+    message,
+    '',
+    attachNote
+  ].filter(l => l !== null && !(l === '' && !phone)).join('\n');
+  window.location.href = 'mailto:info@laser-cleaning-ffm.de'
+    + '?subject=' + encodeURIComponent('New Assessment Request')
+    + '&body=' + encodeURIComponent(body);
 }
 </script>
 </body>
