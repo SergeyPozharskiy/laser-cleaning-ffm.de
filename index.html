@@ -122,6 +122,23 @@
   .form-submit { margin-top: 0.5rem; }
   .form-note { font-size: 12px; color: var(--muted); margin-top: 0.75rem; }
 
+  .projects { padding: 5rem 3rem; }
+  .projects-inner { max-width: 1100px; margin: 0 auto; }
+  .projects-sub { color: var(--muted); font-size: 15px; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .project-item { display: flex; flex-direction: column; gap: 0.75rem; }
+  .project-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--laser); }
+
+  .ba-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 2px; border: 0.5px solid rgba(255,255,255,0.08); cursor: col-resize; user-select: none; -webkit-user-select: none; background: #111; }
+  .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .ba-img.ba-before { clip-path: inset(0 50% 0 0); }
+  .ba-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(255,255,255,0.9); transform: translateX(-50%); pointer-events: none; }
+  .ba-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 38px; height: 38px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.35); }
+  .ba-knob svg { width: 20px; height: 20px; }
+  .ba-label { position: absolute; bottom: 10px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; background: rgba(0,0,0,0.55); color: #fff; padding: 3px 8px; border-radius: 2px; pointer-events: none; }
+  .ba-label-l { left: 10px; }
+  .ba-label-r { right: 10px; }
+
   .process { padding: 5rem 3rem; background: var(--mid); }
   .process-inner { max-width: 1100px; margin: 0 auto; }
   .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); margin-bottom: 4rem; }
@@ -151,6 +168,7 @@
     .laser-line { margin: 0 1.25rem; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -162,7 +180,7 @@
     <ul class="nav-links">
       <li><a href="#services" data-key="nav_services">Services</a></li>
       <li><a href="#process" data-key="nav_process">Process</a></li>
-      <li><a data-key="nav_projects">Projects</a></li>
+      <li><a href="#projects" data-key="nav_projects">Projects</a></li>
       <li><a href="#contact" data-key="nav_contact">Contact</a></li>
     </ul>
     <div class="lang-toggle">
@@ -297,6 +315,85 @@
         <div class="beam"></div>
         <div class="beam-label" data-key="beam_label">Laser Ablation Active</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="projects" id="projects">
+  <div class="projects-inner">
+    <div class="section-label" data-key="projects_label">Our Work</div>
+    <h2 class="section-title" data-key="projects_title">Before &amp; After</h2>
+    <p class="projects-sub" data-key="projects_sub">Drag the slider to compare surfaces before and after laser cleaning. Real results from our completed jobs.</p>
+    <div class="projects-grid">
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s1_name">Rust Removal</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/rust_removal/photo/rust_removal_photo_001_after.png" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/rust_removal/photo/rust_removal_photo_001_before.png" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s9_name">Stone Restoration</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/stone_restouration/photo/stone_restouration_photo_001_after.png" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/stone_restouration/photo/stone_restouration_photo_001_before.png" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s6_name">Wood Cleaning</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/wood_cleaning/photo/wood_cleaning_photo_001_after.png" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/wood_cleaning/photo/wood_cleaning_photo_001_before.png" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s5_name">Mold Cleaning</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/mold_cleaning/photo/mold_cleaning_photo_001_after.png" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/mold_cleaning/photo/mold_cleaning_photo_001_before.png" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s7_name">Graffiti Removal</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/graffiti_removal/photo/graffiti_removal_photo_001_after.webp" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/graffiti_removal/photo/graffiti_removal_photo_001_before.webp" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-cat" data-key="s2_name">Oil Stain Removal</div>
+        <div class="ba-wrap">
+          <img class="ba-img ba-after"  src="resources/img/services/oil_stain_removal/oil_stain_removal_001_after.png" alt="After">
+          <img class="ba-img ba-before" src="resources/img/services/oil_stain_removal/oil_stain_removal_001_before.png" alt="Before">
+          <div class="ba-divider"><div class="ba-knob"><svg viewBox="0 0 20 20" fill="none"><path d="M7 10H2M2 10L5 7M2 10L5 13M13 10H18M18 10L15 7M18 10L15 13" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <span class="ba-label ba-label-l" data-key="ba_before">Before</span>
+          <span class="ba-label ba-label-r" data-key="ba_after">After</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -452,6 +549,8 @@ const translations = {
     s7_name:"Graffiti Removal",s7_desc:"Fast, residue-free graffiti cleaning on brick, concrete, metal, and stone. Surface integrity fully preserved.",
     s8_name:"Metal Cleaning",s8_desc:"Thorough laser cleaning of steel, aluminium, and cast metal components. Removes scale, corrosion, and coatings without affecting tolerances.",
     s9_name:"Stone Restoration",s9_desc:"Gentle, non-abrasive laser cleaning of natural stone facades, monuments, and sculptures. Removes soiling and biological growth with precision.",
+    projects_label:"Our Work",projects_title:"Before & After",projects_sub:"Drag the slider to compare surfaces before and after laser cleaning. Real results from our completed jobs.",
+    ba_before:"Before",ba_after:"After",
     process_label:"How It Works",process_title:"The Laser Cleaning Process",
     p1_title:"Surface Assessment",p1_desc:"Our technician inspects the surface, identifies contamination type and depth, and selects optimal laser parameters for the material.",
     p2_title:"Laser Application",p2_desc:"Concentrated short laser pulses are directed precisely at the contaminated layer. No masking, no solvents — only light.",
@@ -502,6 +601,8 @@ const translations = {
     s7_name:"Graffitibeseitigung",s7_desc:"Schnelle, rückstandsfreie Graffitibeseitigung auf Ziegel, Beton, Metall und Stein. Oberfläche vollständig erhalten.",
     s8_name:"Metallreinigung",s8_desc:"Gründliche Laserreinigung von Stahl-, Aluminium- und Gussmetallbauteilen. Entfernt Zunder, Korrosion und Beschichtungen ohne Maßhaltigkeitsverlust.",
     s9_name:"Steinrestaurierung",s9_desc:"Schonende, abriebfreie Laserreinigung von Natursteinfassaden, Denkmälern und Skulpturen. Entfernt Verschmutzungen und biologischen Bewuchs präzise.",
+    projects_label:"Unsere Arbeiten",projects_title:"Vorher & Nachher",projects_sub:"Ziehen Sie den Regler, um Oberflächen vor und nach der Laserreinigung zu vergleichen. Echte Ergebnisse aus abgeschlossenen Projekten.",
+    ba_before:"Vorher",ba_after:"Nachher",
     process_label:"So funktioniert es",process_title:"Der Laserreinigungsprozess",
     p1_title:"Oberflächenbewertung",p1_desc:"Unser Techniker prüft die Oberfläche, identifiziert Art und Tiefe der Verschmutzung und wählt die optimalen Laserparameter für das Material.",
     p2_title:"Laserapplikation",p2_desc:"Konzentrierte kurze Laserpulse werden präzise auf die Verschmutzungsschicht gerichtet. Keine Maskierung, keine Lösungsmittel — nur Licht.",
@@ -555,6 +656,26 @@ function setLang(lang) {
   });
   document.documentElement.lang = lang;
 }
+
+document.querySelectorAll('.ba-wrap').forEach(function(wrap) {
+  var before  = wrap.querySelector('.ba-before');
+  var divider = wrap.querySelector('.ba-divider');
+
+  function move(x) {
+    var r = wrap.getBoundingClientRect();
+    var pct = Math.min(100, Math.max(0, (x - r.left) / r.width * 100));
+    before.style.clipPath  = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    divider.style.left     = pct + '%';
+  }
+
+  var active = false;
+  wrap.addEventListener('mousedown',  function(e) { active = true; move(e.clientX); });
+  window.addEventListener('mouseup',  function()  { active = false; });
+  window.addEventListener('mousemove',function(e) { if (active) move(e.clientX); });
+  wrap.addEventListener('touchstart', function(e) { active = true; move(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchend', function()  { active = false; });
+  window.addEventListener('touchmove',function(e) { if (active) move(e.touches[0].clientX); }, {passive:true});
+});
 
 function submitContactForm(e) {
   e.preventDefault();
