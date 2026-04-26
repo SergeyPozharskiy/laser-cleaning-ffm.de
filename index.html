@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaserCleaning — Industrial Laser Cleaning Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --laser: #FF4B1F; --dark: #0E0E0E; --mid: #1A1A1A; --text: #FFFFFF; --muted: #C2BFB5; --border: rgba(255,75,31,0.2); }
+  body { background: var(--dark); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; border-bottom: 0.5px solid rgba(255,255,255,0.08); position: sticky; top: 0; background: rgba(14,14,14,0.95); backdrop-filter: blur(8px); z-index: 100; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--text); }
+  .logo span { color: var(--laser); }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.5px; transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--laser); color: #fff; border: none; padding: 0.5rem 1.25rem; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.85; }
+  .lang-toggle { display: flex; gap: 6px; }
+  .lang-btn { background: #2C2C2C; color: var(--muted); border: 1px solid #3A3A3A; padding: 6px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; letter-spacing: 1px; border-radius: 20px; transition: all 0.2s; }
+  .lang-btn.active { border-color: var(--laser); color: var(--laser); background: rgba(255,75,31,0.12); }
+  .lang-btn:not(.active):hover { background: #383838; color: #fff; }
+
+  .hero { padding: 6rem 3rem 5rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,75,31,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--laser); margin-bottom: 1.5rem; border: 0.5px solid var(--border); padding: 6px 14px; border-radius: 2px; }
+  .hero-tag::before { content: ''; display: block; width: 6px; height: 6px; background: var(--laser); border-radius: 50%; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 100px); line-height: 1.0; letter-spacing: 3px; margin-bottom: 1.5rem; color: #fff; }
+  h1 em { color: var(--laser); font-style: normal; }
+  .hero-sub { max-width: 480px; color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 2.5rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--laser); color: #fff; border: none; padding: 0.85rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost { background: transparent; color: var(--text); border: 0.5px solid rgba(255,255,255,0.2); padding: 0.85rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; border-radius: 2px; transition: border-color 0.2s; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 0.5px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); letter-spacing: 1px; }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; margin-top: 2px; }
+
+  .laser-line { height: 1px; background: linear-gradient(90deg, transparent, var(--laser), transparent); margin: 0 3rem; opacity: 0.4; }
+
+  .services { padding: 5rem 3rem; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--laser); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 4vw, 44px); letter-spacing: 1px; margin-bottom: 3rem; color: #fff; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); }
+  .service-card { background: var(--dark); padding: 2rem 1.75rem; transition: background 0.2s; position: relative; overflow: hidden; }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--laser); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .service-card:hover { background: var(--mid); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon { width: 40px; height: 40px; margin-bottom: 1.25rem; }
+  .service-name { font-weight: 500; font-size: 15px; margin-bottom: 0.5rem; color: #fff; }
+  .service-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .why { padding: 5rem 3rem; background: var(--mid); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .beam-container { width: 100%; aspect-ratio: 4/3; background: #0a0a0a; border: 0.5px solid rgba(255,75,31,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .beam { position: absolute; width: 3px; background: linear-gradient(180deg, transparent, var(--laser), #fff, var(--laser), transparent); height: 80%; border-radius: 2px; animation: beam-flicker 2s infinite; box-shadow: 0 0 12px var(--laser); }
+  @keyframes beam-flicker { 0%,100%{opacity:0.9;height:80%}50%{opacity:0.6;height:75%} }
+  .beam-label { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--laser); opacity: 0.7; white-space: nowrap; }
+  .why-list { list-style: none; margin-top: 2rem; }
+  .why-list li { display: flex; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(255,255,255,0.06); }
+  .why-list li:last-child { border-bottom: none; }
+  .check { width: 20px; height: 20px; background: rgba(255,75,31,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .check svg { width: 10px; height: 10px; }
+  .why-title { font-weight: 500; font-size: 14px; margin-bottom: 3px; color: #fff; }
+  .why-text { font-size: 13px; color: var(--muted); }
+
+  .certs { padding: 5rem 3rem; background: var(--dark); }
+  .certs-inner { max-width: 1100px; margin: 0 auto; }
+  .certs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .certs-sub { max-width: 440px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.06); }
+  .cert-card { background: var(--dark); padding: 2rem 1.75rem; transition: background 0.2s; position: relative; overflow: hidden; }
+  .cert-card:hover { background: var(--mid); }
+  .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--laser), transparent); opacity: 0; transition: opacity 0.3s; }
+  .cert-card:hover::before { opacity: 1; }
+  .cert-badge { width: 52px; height: 52px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; }
+  .cert-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: #fff; margin-bottom: 0.3rem; }
+  .cert-full { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--laser); margin-bottom: 0.75rem; }
+  .cert-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .cert-banner { margin-top: 1px; background: var(--mid); padding: 2rem 1.75rem; border: 0.5px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .eu-flag { width: 48px; height: 32px; flex-shrink: 0; }
+  .cert-banner-text { flex: 1; min-width: 200px; }
+  .cert-banner-title { font-weight: 500; font-size: 14px; color: #fff; margin-bottom: 4px; }
+  .cert-banner-sub { font-size: 13px; color: var(--muted); }
+  .cert-verify { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--laser); border: 0.5px solid var(--border); padding: 6px 14px; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .cert-verify:hover { background: rgba(255,75,31,0.08); }
+
+  .cta-section { padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 300px; background: radial-gradient(ellipse, rgba(255,75,31,0.07) 0%, transparent 70%); pointer-events: none; }
+  .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 58px); letter-spacing: 2px; margin-bottom: 1rem; color: #fff; }
+  .cta-section p { color: var(--muted); max-width: 440px; margin: 0 auto 2.5rem; font-size: 15px; }
+  .cta-phone { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--laser); margin-top: 1.5rem; display: block; }
+
+  footer { padding: 2rem 3rem; border-top: 0.5px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; }
+  .footer-logo span { color: var(--laser); }
+  footer p { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+    .hero-stats { gap: 1.5rem; }
+    .services, .why, .certs, .cta-section { padding: 3rem 1.25rem; }
+    .why-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .certs-header { flex-direction: column; align-items: flex-start; }
+    footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    .laser-line { margin: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">LASER<span>CLEANING</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a data-key="nav_services">Services</a></li>
+      <li><a data-key="nav_process">Process</a></li>
+      <li><a data-key="nav_projects">Projects</a></li>
+      <li><a data-key="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="nav-cta" data-key="nav_quote">Get a Quote</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag" data-key="hero_tag">Non-Contact · Chemical-Free · Precision</div>
+  <h1 data-key="hero_h1_html">Industrial<br><em>Laser</em><br>Cleaning</h1>
+  <p class="hero-sub" data-key="hero_sub">Next-generation laser technology for rust removal, paint stripping, mold cleaning, and surface restoration — without abrasives or chemicals.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" data-key="hero_cta1">Request a Quote</button>
+    <button class="btn-ghost" data-key="hero_cta2">See Our Work</button>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">100%</div><div class="stat-label" data-key="stat1">Chemical-Free Process</div></div>
+    <div><div class="stat-num">0</div><div class="stat-label" data-key="stat2">Surface Abrasion</div></div>
+    <div><div class="stat-num">10×</div><div class="stat-label" data-key="stat3">Faster Than Sandblasting</div></div>
+    <div><div class="stat-num">24h</div><div class="stat-label" data-key="stat4">Response Time</div></div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="services">
+  <div class="section-label" data-key="services_label">What We Remove</div>
+  <div class="section-title" data-key="services_title">Our Services</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><path d="M12 28 C14 22,18 18,20 16 C22 14,26 12,28 14 C30 16,28 20,24 22 C20 24,16 26,12 28Z" fill="#FF4B1F" opacity="0.2"/><path d="M14 26 C16 21,19 18,22 17" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="service-name" data-key="s1_name">Rust Removal</div>
+      <div class="service-desc" data-key="s1_desc">Complete oxidation removal from metal surfaces. Restores base material without damage.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><ellipse cx="16" cy="24" rx="5" ry="3" fill="#FF4B1F" opacity="0.2"/><ellipse cx="24" cy="20" rx="4" ry="2.5" fill="#FF4B1F" opacity="0.15"/><line x1="12" y1="28" x2="28" y2="12" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="service-name" data-key="s2_name">Oil Stain Removal</div>
+      <div class="service-desc" data-key="s2_desc">Deep contamination cleaning on concrete, stone, and industrial floors.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><rect x="12" y="14" width="16" height="12" rx="1" stroke="#FF4B1F" stroke-width="1" fill="#FF4B1F" fill-opacity="0.1"/><path d="M16 18 L24 18 M16 22 L22 22" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="service-name" data-key="s3_name">Oxide Layer Removal</div>
+      <div class="service-desc" data-key="s3_desc">Precision removal of oxidation layers, preparing surfaces for coating or welding.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><path d="M13 14 L27 14 L25 26 L15 26 Z" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F" stroke-width="1"/><path d="M13 14 Q20 10 27 14" stroke="#FF4B1F" stroke-width="1.5" fill="none"/></svg>
+      <div class="service-name" data-key="s4_name">Paint Removal</div>
+      <div class="service-desc" data-key="s4_desc">Full or selective paint stripping with zero substrate damage. No solvents required.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><circle cx="16" cy="22" r="3" fill="#FF4B1F" fill-opacity="0.2" stroke="#FF4B1F"/><circle cx="24" cy="18" r="2.5" fill="#FF4B1F" fill-opacity="0.15" stroke="#FF4B1F"/><circle cx="20" cy="26" r="2" fill="#FF4B1F" fill-opacity="0.1" stroke="#FF4B1F"/></svg>
+      <div class="service-name" data-key="s5_name">Mold Cleaning</div>
+      <div class="service-desc" data-key="s5_desc">Safe mold and biofilm elimination on any surface, residential or industrial.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><path d="M14 28 Q14 18 20 14 Q26 18 26 28" fill="#FF4B1F" fill-opacity="0.1" stroke="#FF4B1F" stroke-width="1"/><line x1="14" y1="24" x2="26" y2="24" stroke="#FF4B1F" stroke-width="1"/><line x1="15" y1="28" x2="25" y2="28" stroke="#FF4B1F" stroke-width="1"/></svg>
+      <div class="service-name" data-key="s6_name">Wood Cleaning</div>
+      <div class="service-desc" data-key="s6_desc">Gentle laser restoration of timber — removes stains, char, and weathering without fibre damage.</div>
+    </div>
+    <div class="service-card" style="grid-column: span 2;">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#FF4B1F" stroke-width="0.5" opacity="0.4"/><path d="M12 20 Q16 14 20 18 Q24 22 28 16" stroke="#FF4B1F" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#FF4B1F" fill-opacity="0.2"/></svg>
+      <div class="service-name" data-key="s7_name">Graffiti Removal</div>
+      <div class="service-desc" data-key="s7_desc">Fast, residue-free graffiti cleaning on brick, concrete, metal, and stone. Surface integrity fully preserved.</div>
+    </div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="why">
+  <div class="why-grid">
+    <div>
+      <div class="section-label" data-key="why_label">Why Laser</div>
+      <div class="section-title" data-key="why_title_html">Precision that<br>protects surfaces</div>
+      <ul class="why-list">
+        <li><div class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="why-title" data-key="w1_title">No chemicals or abrasives</div><div class="why-text" data-key="w1_text">Eco-friendly process with no hazardous waste disposal needed.</div></div></li>
+        <li><div class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="why-title" data-key="w2_title">Substrate-safe</div><div class="why-text" data-key="w2_text">Selective ablation removes only target material. Base material remains pristine.</div></div></li>
+        <li><div class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="why-title" data-key="w3_title">Fast turnaround</div><div class="why-text" data-key="w3_text">Laser cleaning is up to 10× faster than traditional sandblasting or chemical stripping.</div></div></li>
+        <li><div class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="why-title" data-key="w4_title">Works on-site</div><div class="why-text" data-key="w4_text">Mobile units operate directly at your facility, minimising downtime.</div></div></li>
+      </ul>
+    </div>
+    <div>
+      <div class="beam-container">
+        <div class="beam"></div>
+        <div class="beam-label" data-key="beam_label">Laser Ablation Active</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="certs">
+  <div class="certs-inner">
+    <div class="certs-header">
+      <div>
+        <div class="section-label" data-key="cert_label">Compliance & Standards</div>
+        <div class="section-title" data-key="cert_title_html">EU Certified<br>Equipment</div>
+      </div>
+      <div class="certs-sub" data-key="cert_sub">All our laser systems carry full European Union certification. Every device meets the strictest EU safety, electromagnetic compatibility, and laser radiation standards before leaving the factory.</div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-badge"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="#FF4B1F" stroke-width="0.5" opacity="0.3"/><text x="26" y="32" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="18" fill="#FF4B1F" letter-spacing="1">CE</text></svg></div>
+        <div class="cert-name" data-key="cert1_name">CE Marking</div>
+        <div class="cert-full" data-key="cert1_full">Conformité Européenne</div>
+        <div class="cert-desc" data-key="cert1_desc">Confirms that all laser systems comply with EU health, safety, and environmental protection legislation. Mandatory for all equipment sold within the European Economic Area.</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="#FF4B1F" stroke-width="0.5" opacity="0.3"/><circle cx="26" cy="26" r="14" stroke="#FF4B1F" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/><path d="M19 26 L23 30 L33 20" stroke="#FF4B1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cert-name">EN 60825</div>
+        <div class="cert-full" data-key="cert2_full">Laser Safety Standard</div>
+        <div class="cert-desc" data-key="cert2_desc">European standard for the safety of laser products. Our equipment is classified and labelled according to laser hazard class, ensuring operator safety at all times.</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="#FF4B1F" stroke-width="0.5" opacity="0.3"/><path d="M14 26 Q18 18 22 26 Q26 34 30 26 Q34 18 38 26" stroke="#FF4B1F" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="26" r="3" fill="#FF4B1F" opacity="0.4"/></svg></div>
+        <div class="cert-name">EMC</div>
+        <div class="cert-full" data-key="cert3_full">Electromagnetic Compatibility</div>
+        <div class="cert-desc" data-key="cert3_desc">Directive 2014/30/EU compliance — all systems are tested to ensure they do not emit disruptive electromagnetic interference and operate correctly in industrial environments.</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge"><svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="#FF4B1F" stroke-width="0.5" opacity="0.3"/><path d="M20 20 L26 14 L32 20 L32 32 L20 32 Z" stroke="#FF4B1F" stroke-width="1" fill="#FF4B1F" fill-opacity="0.1"/><text x="26" y="29" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="8" fill="#FF4B1F">RoHS</text></svg></div>
+        <div class="cert-name">RoHS</div>
+        <div class="cert-full" data-key="cert4_full">Restriction of Hazardous Substances</div>
+        <div class="cert-desc" data-key="cert4_desc">Directive 2011/65/EU compliance — our equipment is manufactured without restricted hazardous substances, making it safe for operators and environmentally responsible.</div>
+      </div>
+    </div>
+    <div class="cert-banner">
+      <svg class="eu-flag" viewBox="0 0 48 32" fill="none"><rect width="48" height="32" rx="2" fill="#003399"/><g fill="#FFDD00"><circle cx="24" cy="5" r="1.2"/><circle cx="29.5" cy="6.5" r="1.2"/><circle cx="33" cy="11" r="1.2"/><circle cx="33" cy="16" r="1.2"/><circle cx="29.5" cy="21" r="1.2"/><circle cx="24" cy="22.5" r="1.2"/><circle cx="18.5" cy="21" r="1.2"/><circle cx="15" cy="16" r="1.2"/><circle cx="15" cy="11" r="1.2"/><circle cx="18.5" cy="6.5" r="1.2"/><circle cx="24" cy="13.75" r="2.5"/></g></svg>
+      <div class="cert-banner-text">
+        <div class="cert-banner-title" data-key="cert_banner_title">All certifications are current and independently verified</div>
+        <div class="cert-banner-sub" data-key="cert_banner_sub">Documentation available upon request. Our equipment meets all EU Machinery Directive 2006/42/EC requirements.</div>
+      </div>
+      <div class="cert-verify" data-key="cert_verify"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Request Documents</div>
+    </div>
+  </div>
+</section>
+
+<div class="laser-line"></div>
+
+<section class="cta-section">
+  <div class="section-label" data-key="cta_label">Get Started</div>
+  <h2 data-key="cta_h2_html">Ready to Restore<br>Your Surfaces?</h2>
+  <p data-key="cta_p">Request a free on-site assessment. We'll evaluate the job and provide a transparent quote within 24 hours.</p>
+  <button class="btn-primary" style="font-size:15px;padding:1rem 2.5rem;" data-key="cta_btn">Request Free Assessment</button>
+  <span class="cta-phone">+49 123 456 7890</span>
+</section>
+
+<footer>
+  <div class="footer-logo">LASER<span>CLEANING</span></div>
+  <p data-key="footer_copy">© 2026 LaserCleaning. All rights reserved.</p>
+  <p>Frankfurt, Germany</p>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    nav_services:"Services",nav_process:"Process",nav_projects:"Projects",nav_contact:"Contact",nav_quote:"Get a Quote",
+    hero_tag:"Non-Contact · Chemical-Free · Precision",
+    hero_h1_html:"Industrial<br><em>Laser</em><br>Cleaning",
+    hero_sub:"Next-generation laser technology for rust removal, paint stripping, mold cleaning, and surface restoration — without abrasives or chemicals.",
+    hero_cta1:"Request a Quote",hero_cta2:"See Our Work",
+    stat1:"Chemical-Free Process",stat2:"Surface Abrasion",stat3:"Faster Than Sandblasting",stat4:"Response Time",
+    services_label:"What We Remove",services_title:"Our Services",
+    s1_name:"Rust Removal",s1_desc:"Complete oxidation removal from metal surfaces. Restores base material without damage.",
+    s2_name:"Oil Stain Removal",s2_desc:"Deep contamination cleaning on concrete, stone, and industrial floors.",
+    s3_name:"Oxide Layer Removal",s3_desc:"Precision removal of oxidation layers, preparing surfaces for coating or welding.",
+    s4_name:"Paint Removal",s4_desc:"Full or selective paint stripping with zero substrate damage. No solvents required.",
+    s5_name:"Mold Cleaning",s5_desc:"Safe mold and biofilm elimination on any surface, residential or industrial.",
+    s6_name:"Wood Cleaning",s6_desc:"Gentle laser restoration of timber — removes stains, char, and weathering without fibre damage.",
+    s7_name:"Graffiti Removal",s7_desc:"Fast, residue-free graffiti cleaning on brick, concrete, metal, and stone. Surface integrity fully preserved.",
+    why_label:"Why Laser",why_title_html:"Precision that<br>protects surfaces",
+    w1_title:"No chemicals or abrasives",w1_text:"Eco-friendly process with no hazardous waste disposal needed.",
+    w2_title:"Substrate-safe",w2_text:"Selective ablation removes only target material. Base material remains pristine.",
+    w3_title:"Fast turnaround",w3_text:"Laser cleaning is up to 10× faster than traditional sandblasting or chemical stripping.",
+    w4_title:"Works on-site",w4_text:"Mobile units operate directly at your facility, minimising downtime.",
+    beam_label:"Laser Ablation Active",
+    cert_label:"Compliance & Standards",cert_title_html:"EU Certified<br>Equipment",
+    cert_sub:"All our laser systems carry full European Union certification. Every device meets the strictest EU safety, electromagnetic compatibility, and laser radiation standards before leaving the factory.",
+    cert1_name:"CE Marking",cert1_full:"Conformité Européenne",cert1_desc:"Confirms that all laser systems comply with EU health, safety, and environmental protection legislation. Mandatory for all equipment sold within the European Economic Area.",
+    cert2_full:"Laser Safety Standard",cert2_desc:"European standard for the safety of laser products. Our equipment is classified and labelled according to laser hazard class, ensuring operator safety at all times.",
+    cert3_full:"Electromagnetic Compatibility",cert3_desc:"Directive 2014/30/EU compliance — all systems are tested to ensure they do not emit disruptive electromagnetic interference and operate correctly in industrial environments.",
+    cert4_full:"Restriction of Hazardous Substances",cert4_desc:"Directive 2011/65/EU compliance — our equipment is manufactured without restricted hazardous substances, making it safe for operators and environmentally responsible.",
+    cert_banner_title:"All certifications are current and independently verified",
+    cert_banner_sub:"Documentation available upon request. Our equipment meets all EU Machinery Directive 2006/42/EC requirements.",
+    cert_verify:"Request Documents",
+    cta_label:"Get Started",cta_h2_html:"Ready to Restore<br>Your Surfaces?",
+    cta_p:"Request a free on-site assessment. We'll evaluate the job and provide a transparent quote within 24 hours.",
+    cta_btn:"Request Free Assessment",footer_copy:"© 2026 LaserCleaning. All rights reserved."
+  },
+  de: {
+    nav_services:"Leistungen",nav_process:"Verfahren",nav_projects:"Projekte",nav_contact:"Kontakt",nav_quote:"Angebot anfragen",
+    hero_tag:"Berührungslos · Chemikalienfrei · Präzise",
+    hero_h1_html:"Industrielle<br><em>Laser</em>reinigung",
+    hero_sub:"Modernste Lasertechnologie für Rostentfernung, Lackstripping, Schimmelreinigung und Oberflächenrestaurierung — ohne Schleifmittel oder Chemikalien.",
+    hero_cta1:"Angebot anfragen",hero_cta2:"Unsere Arbeiten",
+    stat1:"Chemikalienfreier Prozess",stat2:"Oberflächenabrieb",stat3:"Schneller als Sandstrahlen",stat4:"Reaktionszeit",
+    services_label:"Was wir entfernen",services_title:"Unsere Leistungen",
+    s1_name:"Rostentfernung",s1_desc:"Vollständige Oxidationsentfernung von Metalloberflächen. Stellt das Grundmaterial ohne Beschädigung wieder her.",
+    s2_name:"Ölfleckenentfernung",s2_desc:"Tiefenreinigung von Verschmutzungen auf Beton, Stein und Industrieböden.",
+    s3_name:"Oxidschichtentfernung",s3_desc:"Präzise Entfernung von Oxidschichten zur Vorbereitung für Beschichtung oder Schweißen.",
+    s4_name:"Lackentfernung",s4_desc:"Vollständiges oder selektives Lackstripping ohne Substratschäden. Keine Lösungsmittel erforderlich.",
+    s5_name:"Schimmelreinigung",s5_desc:"Sichere Schimmel- und Biofilmelimination auf allen Oberflächen — privat oder industriell.",
+    s6_name:"Holzreinigung",s6_desc:"Schonende Laserrestaurierung von Holz — entfernt Flecken, Verkohlungen und Witterungsschäden ohne Faserschäden.",
+    s7_name:"Graffitibeseitigung",s7_desc:"Schnelle, rückstandsfreie Graffitibeseitigung auf Ziegel, Beton, Metall und Stein. Oberfläche vollständig erhalten.",
+    why_label:"Warum Laser",why_title_html:"Präzision, die<br>Oberflächen schützt",
+    w1_title:"Ohne Chemikalien oder Schleifmittel",w1_text:"Umweltfreundlicher Prozess ohne gefährliche Abfallentsorgung.",
+    w2_title:"Substratschonend",w2_text:"Selektive Ablation entfernt nur das Zielmaterial. Das Grundmaterial bleibt makellos.",
+    w3_title:"Schnelle Abwicklung",w3_text:"Laserreinigung ist bis zu 10× schneller als herkömmliches Sandstrahlen oder chemisches Strippen.",
+    w4_title:"Vor-Ort-Einsatz",w4_text:"Mobile Einheiten arbeiten direkt in Ihrer Anlage und minimieren Ausfallzeiten.",
+    beam_label:"Laserablation Aktiv",
+    cert_label:"Normen & Zertifizierung",cert_title_html:"EU-zertifizierte<br>Geräte",
+    cert_sub:"Alle unsere Lasersysteme tragen die vollständige EU-Zertifizierung. Jedes Gerät erfüllt die strengsten EU-Normen für Sicherheit, elektromagnetische Verträglichkeit und Laserstrahlung.",
+    cert1_name:"CE-Kennzeichnung",cert1_full:"Conformité Européenne",cert1_desc:"Bestätigt, dass alle Lasersysteme den EU-Vorschriften für Gesundheit, Sicherheit und Umweltschutz entsprechen. Pflicht für alle Geräte, die im Europäischen Wirtschaftsraum verkauft werden.",
+    cert2_full:"Lasersicherheitsnorm",cert2_desc:"Europäische Norm für die Sicherheit von Laserprodukten. Unsere Geräte sind nach Lasergefahrenklasse klassifiziert und gekennzeichnet.",
+    cert3_full:"Elektromagnetische Verträglichkeit",cert3_desc:"Konformität mit Richtlinie 2014/30/EU — alle Systeme werden geprüft, um sicherzustellen, dass sie keine störenden elektromagnetischen Interferenzen erzeugen.",
+    cert4_full:"Beschränkung gefährlicher Stoffe",cert4_desc:"Konformität mit Richtlinie 2011/65/EU — unsere Geräte werden ohne eingeschränkte Gefahrstoffe hergestellt und sind sicher für Bediener und die Umwelt.",
+    cert_banner_title:"Alle Zertifizierungen sind aktuell und unabhängig geprüft",
+    cert_banner_sub:"Dokumentation auf Anfrage erhältlich. Unsere Geräte erfüllen alle Anforderungen der EU-Maschinenrichtlinie 2006/42/EG.",
+    cert_verify:"Dokumente anfordern",
+    cta_label:"Jetzt starten",cta_h2_html:"Bereit für makellose<br>Oberflächen?",
+    cta_p:"Fordern Sie eine kostenlose Vor-Ort-Bewertung an. Wir prüfen den Auftrag und liefern innerhalb von 24 Stunden ein transparentes Angebot.",
+    cta_btn:"Kostenlose Bewertung anfragen",footer_copy:"© 2026 LaserCleaning. Alle Rechte vorbehalten."
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (t[key] !== undefined) {
+      if (key.endsWith('_html')) el.innerHTML = t[key];
+      else el.textContent = t[key];
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
