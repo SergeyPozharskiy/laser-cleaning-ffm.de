@@ -8,7 +8,7 @@
 
 ## Titel
 
-Schimmelentfernung mit Laser – Frankfurt – ohne Chemikalien, nachhaltig
+Schimmelentfernung mit Laser – ohne Chemikalien, nachhaltig
 
 ---
 

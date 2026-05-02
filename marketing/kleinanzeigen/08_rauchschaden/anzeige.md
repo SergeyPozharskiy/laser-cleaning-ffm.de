@@ -8,7 +8,7 @@
 
 ## Titel
 
-Rauchschadenreinigung mit Laser – Frankfurt – Ruß & Brandspuren entfernen
+Rauchschadenreinigung mit Laser – Ruß & Brandspuren entfernen
 
 ---
 

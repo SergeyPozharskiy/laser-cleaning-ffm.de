@@ -8,7 +8,7 @@
 
 ## Titel
 
-Steinreinigung & Fassadenreinigung Laser – Frankfurt – schonend & rückstandsfrei
+Schonende Steinreinigung & Fassadenreinigung mit Laser
 
 ---
 
@@ -27,7 +27,7 @@ Lasertechnologie reinigt Stein, Klinker und Fassaden präzise und ohne Abrieb �
 Auch für denkmalgeschützte Gebäude geeignet.
 Kostenloses Angebot auf Anfrage.
 
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 

@@ -1,6 +1,6 @@
 # Kleinanzeigen – Holzreinigung / Holzrestaurierung
 
-**Kategorie:** Dienstleistungen → Haus & Garten -> Reinigungsservice
+**Kategorie:** Weitere Dienstleistungen
 **Zielgruppe:** Privatkunden, Schreinereien, Hausbesitzer  
 **Preis:** auf Anfrage
 
@@ -8,7 +8,7 @@
 
 ## Titel
 
-Holzreinigung & Restaurierung mit Laser – Frankfurt – ohne Schleifen
+Holzreinigung & Restaurierung mit Laser – ohne Schleifen
 
 ---
 
