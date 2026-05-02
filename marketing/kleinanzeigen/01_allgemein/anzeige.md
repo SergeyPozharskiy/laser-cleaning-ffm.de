@@ -35,8 +35,6 @@ Warum Laser?
 Für Privat- und Gewerbekunden.
 Kostenlose Vor-Ort-Bewertung auf Anfrage.
 
-Tel: +49 069 943 22 072
-E-Mail: info@laser-cleaning-ffm.de
 Web: laser-cleaning-ffm.de
 
 ---

@@ -26,8 +26,7 @@ Lasertechnologie eliminiert Schimmel und Biofilm tief und dauerhaft – ohne agg
 Mobiler Einsatz – wir kommen zu Ihnen.
 Kostenloses Angebot auf Anfrage.
 
-📞 +49 069 943 22 072
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 

@@ -26,8 +26,7 @@ Mit Lasertechnologie strippen wir Lacke vollständig oder selektiv – ohne Lös
 Ideal für Kfz-Betriebe, Schlossereien und Industrieunternehmen.
 Mobiler Einsatz möglich.
 
-📞 +49 069 943 22 072
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 

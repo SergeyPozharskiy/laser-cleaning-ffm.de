@@ -27,8 +27,7 @@ Laserrestaurierung erneuert Holzoberflächen schonend – ohne Schleifmaschine, 
 Das Holz bleibt strukturell intakt – bereit für neuen Anstrich oder Öl.
 Mobiler Einsatz, kostenlose Erstbewertung.
 
-📞 +49 069 943 22 072
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 

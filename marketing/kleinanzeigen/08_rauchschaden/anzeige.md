@@ -30,8 +30,7 @@ Auch geeignet für die Vorbereitung von Versicherungsgutachten.
 Mobiler Einsatz in Frankfurt und Rhein-Main-Gebiet.
 Kostenloses Angebot auf Anfrage.
 
-📞 +49 069 943 22 072
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 

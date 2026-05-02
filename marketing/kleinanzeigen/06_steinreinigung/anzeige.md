@@ -27,7 +27,6 @@ Lasertechnologie reinigt Stein, Klinker und Fassaden präzise und ohne Abrieb �
 Auch für denkmalgeschützte Gebäude geeignet.
 Kostenloses Angebot auf Anfrage.
 
-📞 +49 069 943 22 072
 🌐 laser-cleaning-ffm.de
 
 ---

@@ -1,6 +1,6 @@
 # Kleinanzeigen – Rostentfernung
 
-**Kategorie:** Dienstleistungen → Haus & Garten -> Reinigungsservice
+**Kategorie:** Dienstleistungen → Weitere Dienstleistungen
 **Zielgruppe:** Privatkunden, Oldtimer-Besitzer, Handwerksbetriebe  
 **Preis:** auf Anfrage
 
@@ -8,7 +8,7 @@
 
 ## Titel
 
-Rostentfernung mit Laser – Frankfurt / Hessen – kein Schleifen, keine Chemie
+Rostentfernung mit Laser – Frankfurt / Hessen
 
 ---
 
@@ -26,8 +26,7 @@ Mit Laserstrahl entfernen wir Rost vollständig – ohne das Grundmaterial zu be
 Mobiler Einsatz in Frankfurt und Umgebung.
 Kostenloses Angebot auf Anfrage.
 
-📞 +49 069 943 22 072
-🌐 laser-cleaning-ffm.de
+► laser-cleaning-ffm.de
 
 ---
 
