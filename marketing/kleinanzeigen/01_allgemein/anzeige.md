@@ -8,7 +8,7 @@
 
 ## Titel
 
-Laserreinigung Frankfurt – Rost, Lack, Graffiti, Schimmel, Rauchschäden entfernen
+Laserreinigung – Rost, Lack, Graffiti, Schimmel, Rauchschäden
 
 ---
 
