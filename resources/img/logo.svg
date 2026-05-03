@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="glow" cx="40" cy="84" r="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF4B1F" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FF4B1F" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="beam-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="#0E0E0E"/>
+
+  <!-- Beam glow (wide soft) -->
+  <line x1="104" y1="20" x2="40" y2="84"
+        stroke="#FF4B1F" stroke-width="18" stroke-linecap="round" opacity="0.10"/>
+
+  <!-- Beam mid-glow -->
+  <line x1="104" y1="20" x2="40" y2="84"
+        stroke="#FF4B1F" stroke-width="8" stroke-linecap="round" opacity="0.20"/>
+
+  <!-- Beam core (bright) -->
+  <line x1="104" y1="20" x2="40" y2="84"
+        stroke="#FF4B1F" stroke-width="2.5" stroke-linecap="round" filter="url(#beam-glow)"/>
+
+  <!-- Impact glow -->
+  <circle cx="40" cy="84" r="22" fill="url(#glow)"/>
+
+  <!-- Impact dot -->
+  <circle cx="40" cy="84" r="5" fill="#FF4B1F"/>
+  <circle cx="40" cy="84" r="3" fill="#FF8060"/>
+
+  <!-- Scatter sparks -->
+  <line x1="40" y1="84" x2="16" y2="108"
+        stroke="#FF4B1F" stroke-width="2.5" stroke-linecap="round" opacity="0.80"/>
+  <line x1="40" y1="84" x2="22" y2="118"
+        stroke="#FF4B1F" stroke-width="2.0" stroke-linecap="round" opacity="0.60"/>
+  <line x1="40" y1="84" x2="58" y2="118"
+        stroke="#FF4B1F" stroke-width="2.0" stroke-linecap="round" opacity="0.55"/>
+  <line x1="40" y1="84" x2="72" y2="104"
+        stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="40" y1="84" x2="10" y2="96"
+        stroke="#FF4B1F" stroke-width="1.5" stroke-linecap="round" opacity="0.30"/>
+</svg>
