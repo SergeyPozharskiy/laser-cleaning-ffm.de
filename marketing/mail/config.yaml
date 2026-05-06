@@ -1,0 +1,23 @@
+# Laser Cleaning Frankfurt — mail template variables
+# Values used to fill placeholders in marketing/mail/**/*.eml templates.
+#
+
+
+sender:
+  full_name: "Sebastian Morgen"
+  email: "info@laser-cleaning-ffm.de"
+  phone: "+49 69 943 22 072"
+
+company:
+  name: "Laser Cleaning Frankfurt"
+  website: "laser-cleaning-ffm.de"
+  region: "Frankfurt Rhein-Main und Hessen"
+
+template:
+  # Path to the Jinja2 .eml template, relative to this config file
+  # (or absolute). Overridable from CLI via --template.
+  path: "intro/templ/tmpl_hausverwaltung_vorstellung.eml"
+  # Folder where rendered .eml files are saved. Relative to this config file
+  # (or absolute). A relative --out is joined with this folder; an absolute
+  # --out overrides it.
+  output_dir: "intro/ready"
