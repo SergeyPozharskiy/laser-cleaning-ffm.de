@@ -1,0 +1,325 @@
+MIME-Version: 1.0
+Date: {{ headers.date }}
+From: {{ headers.from }}
+To: {{ headers.to }}
+Subject: =?UTF-8?Q?Professionelle_Laserreinigung_f=C3=BCr_Ihre_Liegenschaften_=E2=80=93_Laser_Cleaning_Frankfurt?=
+Content-Type: multipart/alternative; boundary="----=_LCF_BOUNDARY_001"
+
+------=_LCF_BOUNDARY_001
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+{% if recipient.salutation and recipient.last_name -%}
+Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.salutation }} {{ recipient.last_name }},
+{%- else -%}
+Sehr geehrte Damen und Herren,
+{%- endif %}
+
+{{ company.name }} ist ein spezialisierter Dienstleister für industrielle
+Laserreinigung im Raum {{ company.region }}.
+
+Wir möchten Ihnen unsere Leistungen vorstellen und aufzeigen, wie wir Ihre
+Hausverwaltung bei der Instandhaltung und Aufwertung Ihrer Liegenschaften
+unterstützen können.
+
+WARUM LASERREINIGUNG?
+---------------------
+✔ Kein Einsatz von Chemikalien oder Schleifmitteln
+✔ Substratschonend – das Grundmaterial bleibt vollständig erhalten
+✔ Mobiler Einsatz direkt vor Ort – minimale Beeinträchtigung der Bewohner
+✔ Kein Sekundärabfall, kein überschüssiges Wasser, keine Folgeschäden
+
+UNSERE LEISTUNGEN FÜR HAUSVERWALTUNGEN
+---------------------------------------
+• Graffitibeseitigung    – rückstandsfrei auf Fassaden, Beton, Metall, Naturstein
+• Steinrestaurierung     – Fassaden, Treppenhäuser, Einfahrten, Denkmäler
+• Schimmelreinigung      – sichere Beseitigung von Schimmel und Biofilm
+• Rostentfernung         – Tore, Geländer, Balkongitter und Carports
+• Ölfleckenentfernung    – Betonböden, Einfahrten und Tiefgaragenböden
+• Holzreinigung          – Balkone, Holzfassaden schonend restauriert
+
+UNSER ANGEBOT AN SIE
+---------------------
+→ Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)
+→ Eine kostenlose Erstbesichtigung eines konkreten Objektes
+→ Ein transparentes Angebot innerhalb von 24 Stunden
+
+Wir freuen uns auf Ihre Rückmeldung.
+
+Mit freundlichen Grüßen,
+{{ sender.full_name }}
+{{ company.name }}
+
+Tel:   {{ sender.phone }}
+Mail:  {{ sender.email }}
+Web:   {{ company.website }}
+
+------=_LCF_BOUNDARY_001
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#f0f0f0;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0f0f0;">
+  <tr>
+    <td align="center" style="padding:30px 16px;">
+
+      <!-- ===== MAIN CARD ===== -->
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="background-color:#0E0E0E;padding:28px 40px 24px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="middle">
+                  <span style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;letter-spacing:4px;color:#ffffff;text-decoration:none;">LASER</span><span style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;letter-spacing:4px;color:#FF4B1F;text-decoration:none;">CLEANING</span>
+                  <br>
+                  <span style="font-family:Arial,sans-serif;font-size:10px;color:#666666;letter-spacing:3px;text-transform:uppercase;">Frankfurt</span>
+                </td>
+                <td valign="middle" align="right">
+                  <span style="font-family:Arial,sans-serif;font-size:10px;color:#555555;letter-spacing:1px;">Berührungslos&nbsp;·&nbsp;Chemikalienfrei&nbsp;·&nbsp;Präzise</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ORANGE ACCENT BAR -->
+        <tr>
+          <td style="background-color:#FF4B1F;height:3px;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td>
+        </tr>
+
+        <!-- INTRO BLOCK -->
+        <tr>
+          <td style="padding:36px 40px 24px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;mso-line-height-rule:exactly;">Kooperationsanfrage</p>
+            <h1 style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;color:#1a1a1a;margin:0 0 24px 0;line-height:1.35;mso-line-height-rule:exactly;">Professionelle Laserreinigung<br>für Ihre Liegenschaften</h1>
+
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">{% if recipient.salutation and recipient.last_name -%}
+Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.salutation }} {{ recipient.last_name }},
+{%- else -%}
+Sehr geehrte Damen und Herren,
+{%- endif %}</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              <strong>{{ company.name }}</strong> ist ein spezialisierter Dienstleister für industrielle Laserreinigung im Raum {{ company.region }}.
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              Wir möchten Ihnen unsere Leistungen vorstellen und aufzeigen, wie wir Ihre Hausverwaltung bei der Instandhaltung und Aufwertung Ihrer Liegenschaften unterstützen können.
+            </p>
+          </td>
+        </tr>
+
+        <!-- WHY LASER BOX -->
+        <tr>
+          <td style="padding:0 40px 28px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:#f7f7f7;border-left:4px solid #FF4B1F;padding:20px 24px;">
+                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px 0;mso-line-height-rule:exactly;">Warum Laserreinigung?</p>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Kein Einsatz von Chemikalien oder Schleifmitteln</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Substratschonend – das Grundmaterial bleibt vollständig erhalten</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Bis zu 10× schneller als herkömmliches Sandstrahlen oder chemisches Strippen</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Mobiler Einsatz direkt vor Ort – minimale Beeinträchtigung der Bewohner</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Kein Sekundärabfall, kein überschüssiges Wasser, keine Folgeschäden</td></tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- SERVICES HEADING -->
+        <tr>
+          <td style="padding:0 40px 16px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0;mso-line-height-rule:exactly;">Unsere Leistungen für Hausverwaltungen</p>
+          </td>
+        </tr>
+
+        <!-- SERVICES GRID ROW 1 -->
+        <tr>
+          <td style="padding:0 40px 10px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48%" valign="top" style="padding-right:8px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Graffitibeseitigung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Rückstandsfrei auf Fassaden, Beton, Metall und Naturstein</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="4%">&nbsp;</td>
+                <td width="48%" valign="top">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Steinrestaurierung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Fassaden, Treppenhäuser, Einfahrten und Denkmäler</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- SERVICES GRID ROW 2 -->
+        <tr>
+          <td style="padding:0 40px 10px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48%" valign="top" style="padding-right:8px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Schimmelreinigung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Sichere Beseitigung von Schimmel und Biofilm auf allen Oberflächen</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="4%">&nbsp;</td>
+                <td width="48%" valign="top">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Rostentfernung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Tore, Geländer, Balkongitter und Carports restauriert</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- SERVICES GRID ROW 3 -->
+        <tr>
+          <td style="padding:0 40px 28px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48%" valign="top" style="padding-right:8px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Ölfleckenentfernung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Betonböden, Einfahrten und Tiefgaragenböden</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="4%">&nbsp;</td>
+                <td width="48%" valign="top">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
+                    <tr>
+                      <td style="padding:14px 16px;">
+                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Holzreinigung</p>
+                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Balkone und Holzfassaden schonend restauriert</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- OFFER -->
+        <tr>
+          <td style="padding:0 40px 28px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:24px 0 12px 0;mso-line-height-rule:exactly;">
+              Wir würden uns freuen, Ihnen das Verfahren persönlich vorzustellen und gemeinsam zu besprechen, für welche Ihrer Objekte eine Zusammenarbeit sinnvoll sein könnte.
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 10px 0;mso-line-height-rule:exactly;">Gerne bieten wir Ihnen an:</p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)</td></tr>
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Eine kostenlose Erstbesichtigung eines konkreten Objektes</td></tr>
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Ein transparentes Angebot innerhalb von 24 Stunden</td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- CTA BUTTON -->
+        <tr>
+          <td align="center" style="padding:0 40px 36px 40px;">
+            <!--[if mso]>
+            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="mailto:{{ sender.email }}?subject=Kennenlerntermin%20Laser%20Cleaning%20Frankfurt" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="4%" stroke="f" fillcolor="#FF4B1F">
+              <w:anchorlock/>
+              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Jetzt Termin vereinbaren</center>
+            </v:roundrect>
+            <![endif]-->
+            <!--[if !mso]><!-->
+            <a href="mailto:{{ sender.email }}?subject=Kennenlerntermin%20Laser%20Cleaning%20Frankfurt"
+               style="display:inline-block;background-color:#FF4B1F;color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:14px 36px;border-radius:3px;mso-hide:all;">
+              Jetzt Termin vereinbaren
+            </a>
+            <!--<![endif]-->
+          </td>
+        </tr>
+
+        <!-- CLOSING -->
+        <tr>
+          <td style="padding:0 40px 36px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:24px 0 6px 0;mso-line-height-rule:exactly;">
+              Wir freuen uns auf Ihre Rückmeldung und stehen für Rückfragen jederzeit gerne zur Verfügung.
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 20px 0;mso-line-height-rule:exactly;">
+              Mit freundlichen Grüßen,
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#1a1a1a;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              <strong>{{ sender.full_name }}</strong><br>
+              {{ company.name }}
+            </p>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="background-color:#0E0E0E;padding:22px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="top">
+                  <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:bold;color:#ffffff;margin:0 0 6px 0;mso-line-height-rule:exactly;">{{ company.name }}</p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0 0 3px 0;mso-line-height-rule:exactly;">Tel: <a href="tel:{{ sender.phone | replace(' ', '') }}" style="color:#FF4B1F;text-decoration:none;">{{ sender.phone }}</a></p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0 0 3px 0;mso-line-height-rule:exactly;">E-Mail: <a href="mailto:{{ sender.email }}" style="color:#FF4B1F;text-decoration:none;">{{ sender.email }}</a></p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0;mso-line-height-rule:exactly;">Web: <a href="https://{{ company.website }}" style="color:#FF4B1F;text-decoration:none;">{{ company.website }}</a></p>
+                </td>
+                <td valign="top" align="right">
+                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#555555;margin:0;line-height:1.6;mso-line-height-rule:exactly;text-align:right;">{{ company.region }}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+      <!-- END MAIN CARD -->
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+
+------=_LCF_BOUNDARY_001--

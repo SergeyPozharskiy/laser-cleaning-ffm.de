@@ -59,6 +59,12 @@ template:
   # Папка, куда сохраняются готовые .eml. Относительный --out
   # склеивается с этой папкой; абсолютный --out — перебивает.
   output_dir: "intro"
+
+recipients:
+  # Путь к файлу получателей (относительно config.yaml или абсолютный).
+  # Перебивается флагом --recipients из CLI.
+  # Меняй на "recipients_hv.yaml" и т.п. для другой кампании.
+  path: "recipients.yaml"
 ```
 
 ### `recipients.yaml` — список получателей
@@ -112,15 +118,24 @@ Wrote ...\marketing\mail\intro\hausverwaltung_vorstellung-Aventus-Immobilien.eml
 
 Открой `.eml` двойным кликом — он импортируется в дефолтный почтовый клиент (Outlook / Thunderbird / Apple Mail) как готовое письмо. Проверь содержимое и нажми «Отправить».
 
+### Пакетный прогон по всем `pending`
+
+```powershell
+python render_mail.py --all-pending
+```
+
+Сгенерирует по одному `.eml` для каждого получателя со `status: pending` в активном файле получателей (берётся из `config.recipients.path`). Имена файлов автогенерируются (`--out` в этом режиме недопустим).
+
 ### Аргументы
 
 | Аргумент | Обязательный | Описание |
 |---|---|---|
-| `--recipient` | да | email получателя (ключ поиска в `recipients.yaml`) |
-| `--out` | нет | имя/путь файла. По умолчанию — `<template-без-tmpl_>-<company-с-дефисами>.eml`. Относительный путь склеивается с `template.output_dir` из `config.yaml`; абсолютный — перебивает |
+| `--recipient` | один из | email получателя (ключ поиска в файле получателей). Взаимоисключим с `--all-pending` |
+| `--all-pending` | один из | пакетный режим: рендерит письмо для каждого получателя со `status: pending` |
+| `--out` | нет | имя/путь файла. Только для одиночного `--recipient`. По умолчанию — `<template-без-tmpl_>-<company-с-дефисами>.eml`. Относительный путь склеивается с `template.output_dir` из `config.yaml`; абсолютный — перебивает |
 | `--template` | нет | путь к `.eml`-шаблону. По умолчанию — `template.path` из `config.yaml` |
 | `--config` | нет | путь к `config.yaml` (по умолчанию рядом со скриптом) |
-| `--recipients` | нет | путь к `recipients.yaml` (по умолчанию рядом со скриптом) |
+| `--recipients` | нет | путь к файлу получателей. По умолчанию — `recipients.path` из `config.yaml`, иначе `recipients.yaml` рядом с конфигом |
 
 ## Типичные ошибки
 

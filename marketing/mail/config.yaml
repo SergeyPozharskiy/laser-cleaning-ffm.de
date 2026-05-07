@@ -21,3 +21,9 @@ template:
   # (or absolute). A relative --out is joined with this folder; an absolute
   # --out overrides it.
   output_dir: "intro/ready"
+
+recipients:
+  # Path to the recipients .yaml file, relative to this config file
+  # (or absolute). Overridable from CLI via --recipients.
+  # Switch this to e.g. "recipients_hv.yaml" to target a different campaign.
+  path: "recipients_hv.yaml"

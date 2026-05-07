@@ -2,7 +2,7 @@ MIME-Version: 1.0
 Date: {{ headers.date }}
 From: {{ headers.from }}
 To: {{ headers.to }}
-Subject: =?UTF-8?Q?Professionelle_Laserreinigung_f=C3=BCr_Ihre_Liegenschaften_=E2=80=93_Laser_Cleaning_Frankfurt?=
+Subject: =?UTF-8?Q?Wiederkehrende_Verschmutzungen_an_Ihren_Liegenschaften=3F_=E2=80=93_Eine_kurze_Anfrage?=
 Content-Type: multipart/alternative; boundary="----=_LCF_BOUNDARY_001"
 
 ------=_LCF_BOUNDARY_001
@@ -15,37 +15,48 @@ Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.sal
 Sehr geehrte Damen und Herren,
 {%- endif %}
 
-{{ company.name }} ist ein spezialisierter Dienstleister für industrielle
-Laserreinigung im Raum {{ company.region }}.
+als Hausverwaltung kennen Sie die immer wiederkehrenden Verschmutzungs-
+und Verschleißprobleme an Ihren Objekten vermutlich nur zu gut.
 
-Wir möchten Ihnen unsere Leistungen vorstellen und aufzeigen, wie wir Ihre
-Hausverwaltung bei der Instandhaltung und Aufwertung Ihrer Liegenschaften
-unterstützen können.
+Wir möchten Ihnen daher zunächst eine einfache Frage stellen:
 
-WARUM LASERREINIGUNG?
----------------------
+Treten an den von Ihnen verwalteten Liegenschaften eine oder mehrere der
+folgenden Aufgaben regelmäßig auf?
+
+• Graffiti           – an Fassaden, Hauseingängen, Tiefgaragenwänden
+• Schimmel & Biofilm – an Außenwänden, in Kellern oder Treppenhäusern
+• Rost               – an Toren, Geländern, Balkongittern, Carports
+• Ölflecken          – in Tiefgaragen, auf Stellplätzen, Einfahrten
+• Verwitterte Stein- oder Holzfassaden, die eine Restaurierung benötigen
+• Alte Beschichtungen oder Verkrustungen, die schwer zu entfernen sind
+
+Wenn auch nur eine dieser Aufgaben für Sie aktuell oder wiederkehrend
+ist, lohnt sich ein kurzes Gespräch – denn genau dafür sind wir
+spezialisiert.
+
+ÜBER UNS
+--------
+{{ company.name }} ist ein spezialisierter Dienstleister für
+industrielle Laserreinigung im Raum {{ company.region }}. Wir entfernen
+Verschmutzungen, Beschichtungen und Korrosion berührungslos, ohne
+Chemikalien und ohne das Grundmaterial anzugreifen.
+
+Was die Laserreinigung in der Praxis für Sie bedeutet:
 ✔ Kein Einsatz von Chemikalien oder Schleifmitteln
 ✔ Substratschonend – das Grundmaterial bleibt vollständig erhalten
-✔ Bis zu 10× schneller als Sandstrahlen oder chemisches Strippen
 ✔ Mobiler Einsatz direkt vor Ort – minimale Beeinträchtigung der Bewohner
 ✔ Kein Sekundärabfall, kein überschüssiges Wasser, keine Folgeschäden
 
-UNSERE LEISTUNGEN FÜR HAUSVERWALTUNGEN
----------------------------------------
-• Graffitibeseitigung    – rückstandsfrei auf Fassaden, Beton, Metall, Naturstein
-• Steinrestaurierung     – Fassaden, Treppenhäuser, Einfahrten, Denkmäler
-• Schimmelreinigung      – sichere Beseitigung von Schimmel und Biofilm
-• Rostentfernung         – Tore, Geländer, Balkongitter und Carports
-• Ölfleckenentfernung    – Betonböden, Einfahrten und Tiefgaragenböden
-• Holzreinigung          – Balkone, Holzfassaden schonend restauriert
+UNVERBINDLICH UND KOSTENLOS
+---------------------------
+Sollte eines der oben genannten Themen für Sie relevant sein, freuen
+wir uns über eine kurze Rückmeldung. Wir bieten Ihnen an:
 
-UNSER ANGEBOT AN SIE
----------------------
 → Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)
 → Eine kostenlose Erstbesichtigung eines konkreten Objektes
 → Ein transparentes Angebot innerhalb von 24 Stunden
 
-Wir freuen uns auf Ihre Rückmeldung.
+Sie erreichen uns jederzeit telefonisch oder per E-Mail.
 
 Mit freundlichen Grüßen,
 {{ sender.full_name }}
@@ -107,9 +118,9 @@ Content-Transfer-Encoding: 8bit
 
         <!-- INTRO BLOCK -->
         <tr>
-          <td style="padding:36px 40px 24px 40px;">
-            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;mso-line-height-rule:exactly;">Kooperationsanfrage</p>
-            <h1 style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;color:#1a1a1a;margin:0 0 24px 0;line-height:1.35;mso-line-height-rule:exactly;">Professionelle Laserreinigung<br>für Ihre Liegenschaften</h1>
+          <td style="padding:36px 40px 18px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;mso-line-height-rule:exactly;">Kurze Anfrage</p>
+            <h1 style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;color:#1a1a1a;margin:0 0 24px 0;line-height:1.35;mso-line-height-rule:exactly;">Wiederkehrende Verschmutzungen<br>an Ihren Liegenschaften?</h1>
 
             <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">{% if recipient.salutation and recipient.last_name -%}
 Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.salutation }} {{ recipient.last_name }},
@@ -117,10 +128,52 @@ Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.sal
 Sehr geehrte Damen und Herren,
 {%- endif %}</p>
             <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
-              <strong>{{ company.name }}</strong> ist ein spezialisierter Dienstleister für industrielle Laserreinigung im Raum {{ company.region }}.
+              als Hausverwaltung kennen Sie die immer wiederkehrenden Verschmutzungs- und Verschleißprobleme an Ihren Objekten vermutlich nur zu gut.
             </p>
             <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
-              Wir möchten Ihnen unsere Leistungen vorstellen und aufzeigen, wie wir Ihre Hausverwaltung bei der Instandhaltung und Aufwertung Ihrer Liegenschaften unterstützen können.
+              Wir möchten Ihnen daher zunächst eine einfache Frage stellen:
+            </p>
+          </td>
+        </tr>
+
+        <!-- QUESTION BOX -->
+        <tr>
+          <td style="padding:0 40px 24px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:#f7f7f7;border-left:4px solid #FF4B1F;padding:22px 24px;">
+                  <p style="font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#1a1a1a;line-height:1.5;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+                    Treten an den von Ihnen verwalteten Liegenschaften eine oder mehrere der folgenden Aufgaben regelmäßig auf?
+                  </p>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Graffiti</strong> an Fassaden, Hauseingängen oder Tiefgaragenwänden</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Schimmel und Biofilm</strong> an Außenwänden, in Kellern oder Treppenhäusern</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Rost</strong> an Toren, Geländern, Balkongittern oder Carports</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Ölflecken</strong> in Tiefgaragen, auf Stellplätzen oder Einfahrten</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Verwitterte Stein- oder Holzfassaden</strong>, die eine Restaurierung benötigen</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Alte Beschichtungen oder Verkrustungen</strong>, die mit herkömmlichen Verfahren schwer zu entfernen sind</td></tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BRIDGE TO COMPANY -->
+        <tr>
+          <td style="padding:0 40px 24px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              Wenn auch nur eine dieser Aufgaben für Sie aktuell oder wiederkehrend ist, lohnt sich ein kurzes Gespräch – denn genau dafür sind wir spezialisiert.
+            </p>
+          </td>
+        </tr>
+
+        <!-- COMPANY INTRO -->
+        <tr>
+          <td style="padding:0 40px 18px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:24px 0 10px 0;mso-line-height-rule:exactly;">Über uns</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              <strong>{{ company.name }}</strong> ist ein spezialisierter Dienstleister für industrielle Laserreinigung im Raum {{ company.region }}. Wir entfernen Verschmutzungen, Beschichtungen und Korrosion berührungslos, ohne Chemikalien und ohne das Grundmaterial anzugreifen.
             </p>
           </td>
         </tr>
@@ -131,113 +184,12 @@ Sehr geehrte Damen und Herren,
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td style="background-color:#f7f7f7;border-left:4px solid #FF4B1F;padding:20px 24px;">
-                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px 0;mso-line-height-rule:exactly;">Warum Laserreinigung?</p>
+                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px 0;mso-line-height-rule:exactly;">Was das für Sie bedeutet</p>
                   <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Kein Einsatz von Chemikalien oder Schleifmitteln</td></tr>
                     <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Substratschonend – das Grundmaterial bleibt vollständig erhalten</td></tr>
-                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Bis zu 10× schneller als herkömmliches Sandstrahlen oder chemisches Strippen</td></tr>
                     <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Mobiler Einsatz direkt vor Ort – minimale Beeinträchtigung der Bewohner</td></tr>
                     <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Kein Sekundärabfall, kein überschüssiges Wasser, keine Folgeschäden</td></tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- SERVICES HEADING -->
-        <tr>
-          <td style="padding:0 40px 16px 40px;">
-            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0;mso-line-height-rule:exactly;">Unsere Leistungen für Hausverwaltungen</p>
-          </td>
-        </tr>
-
-        <!-- SERVICES GRID ROW 1 -->
-        <tr>
-          <td style="padding:0 40px 10px 40px;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td width="48%" valign="top" style="padding-right:8px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Graffitibeseitigung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Rückstandsfrei auf Fassaden, Beton, Metall und Naturstein</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-                <td width="4%">&nbsp;</td>
-                <td width="48%" valign="top">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Steinrestaurierung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Fassaden, Treppenhäuser, Einfahrten und Denkmäler</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- SERVICES GRID ROW 2 -->
-        <tr>
-          <td style="padding:0 40px 10px 40px;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td width="48%" valign="top" style="padding-right:8px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Schimmelreinigung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Sichere Beseitigung von Schimmel und Biofilm auf allen Oberflächen</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-                <td width="4%">&nbsp;</td>
-                <td width="48%" valign="top">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Rostentfernung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Tore, Geländer, Balkongitter und Carports restauriert</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- SERVICES GRID ROW 3 -->
-        <tr>
-          <td style="padding:0 40px 28px 40px;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td width="48%" valign="top" style="padding-right:8px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Ölfleckenentfernung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Betonböden, Einfahrten und Tiefgaragenböden</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-                <td width="4%">&nbsp;</td>
-                <td width="48%" valign="top">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e8e8e8;">
-                    <tr>
-                      <td style="padding:14px 16px;">
-                        <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#1a1a1a;margin:0 0 5px 0;mso-line-height-rule:exactly;">Holzreinigung</p>
-                        <p style="font-family:Arial,sans-serif;font-size:12px;color:#777777;margin:0;line-height:1.5;mso-line-height-rule:exactly;">Balkone und Holzfassaden schonend restauriert</p>
-                      </td>
-                    </tr>
                   </table>
                 </td>
               </tr>
@@ -248,10 +200,10 @@ Sehr geehrte Damen und Herren,
         <!-- OFFER -->
         <tr>
           <td style="padding:0 40px 28px 40px;border-top:1px solid #eeeeee;">
-            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:24px 0 12px 0;mso-line-height-rule:exactly;">
-              Wir würden uns freuen, Ihnen das Verfahren persönlich vorzustellen und gemeinsam zu besprechen, für welche Ihrer Objekte eine Zusammenarbeit sinnvoll sein könnte.
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:24px 0 10px 0;mso-line-height-rule:exactly;">Unverbindlich und kostenlos</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              Sollte eines der oben genannten Themen für Sie relevant sein, freuen wir uns über eine kurze Rückmeldung. Wir bieten Ihnen an:
             </p>
-            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 10px 0;mso-line-height-rule:exactly;">Gerne bieten wir Ihnen an:</p>
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)</td></tr>
               <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Eine kostenlose Erstbesichtigung eines konkreten Objektes</td></tr>
@@ -264,15 +216,15 @@ Sehr geehrte Damen und Herren,
         <tr>
           <td align="center" style="padding:0 40px 36px 40px;">
             <!--[if mso]>
-            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="mailto:{{ sender.email }}?subject=Kennenlerntermin%20Laser%20Cleaning%20Frankfurt" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="4%" stroke="f" fillcolor="#FF4B1F">
+            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Liegenschaft" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="4%" stroke="f" fillcolor="#FF4B1F">
               <w:anchorlock/>
-              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Jetzt Termin vereinbaren</center>
+              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Jetzt unverbindlich anfragen</center>
             </v:roundrect>
             <![endif]-->
             <!--[if !mso]><!-->
-            <a href="mailto:{{ sender.email }}?subject=Kennenlerntermin%20Laser%20Cleaning%20Frankfurt"
+            <a href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Liegenschaft"
                style="display:inline-block;background-color:#FF4B1F;color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:14px 36px;border-radius:3px;mso-hide:all;">
-              Jetzt Termin vereinbaren
+              Jetzt unverbindlich anfragen
             </a>
             <!--<![endif]-->
           </td>
@@ -282,7 +234,7 @@ Sehr geehrte Damen und Herren,
         <tr>
           <td style="padding:0 40px 36px 40px;border-top:1px solid #eeeeee;">
             <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:24px 0 6px 0;mso-line-height-rule:exactly;">
-              Wir freuen uns auf Ihre Rückmeldung und stehen für Rückfragen jederzeit gerne zur Verfügung.
+              Sie erreichen uns jederzeit telefonisch oder per E-Mail – wir freuen uns auf Ihre Rückmeldung.
             </p>
             <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 20px 0;mso-line-height-rule:exactly;">
               Mit freundlichen Grüßen,
