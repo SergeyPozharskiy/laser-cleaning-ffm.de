@@ -1,0 +1,283 @@
+MIME-Version: 1.0
+Date: {{ headers.date }}
+From: {{ headers.from }}
+To: {{ headers.to }}
+Subject: =?UTF-8?Q?Rost,_Verkokung,_Altlack_in_Ihrer_Werkstatt=3F_=E2=80=93_Eine_kurze_Anfrage?=
+Content-Type: multipart/alternative; boundary="----=_LCF_BOUNDARY_001"
+
+------=_LCF_BOUNDARY_001
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+{% if recipient.salutation and recipient.last_name -%}
+Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.salutation }} {{ recipient.last_name }},
+{%- else -%}
+Sehr geehrte Damen und Herren,
+{%- endif %}
+
+als Werkstatt kennen Sie die wiederkehrenden Aufgaben rund um Rost,
+verbrannte Rückstände und alte Beschichtungen vermutlich nur zu gut –
+und wissen auch, wie zeitintensiv und materialkritisch das klassische
+Sandstrahlen oder chemische Strippen sein kann.
+
+Wir möchten Ihnen daher zunächst eine einfache Frage stellen:
+
+Treten an Fahrzeugen, die durch Ihre Werkstatt laufen, eine oder
+mehrere der folgenden Aufgaben regelmäßig auf?
+
+• Rost                – an Karosserieblechen, Rahmen, Auspuffanlagen, Bremsteilen
+• Verkokung im Motor  – Ansaugkrümmer, Ventile, Kolbenböden, Turbolader, AGR-Ventile
+• Alter Lack          – schonende Entlackung dünner Karosseriebleche ohne Verzug
+• Unterbodenschutz    – flächige, rückstandsfreie Entfernung
+• Aufkleber & Folien  – rückstandsfreies Ablösen ohne Lackangriff
+• Schweißnahtbereich  – blanke, oxidfreie Fügezone ohne Strahlmittelreste
+• Felgen & Bremssättel – schonende Reinigung von Alu, Stahl und Guss
+• Oldtimer-Restauration – materialschonend an empfindlichen Originalblechen
+
+Wenn auch nur eine dieser Aufgaben für Sie aktuell oder wiederkehrend
+ist, lohnt sich ein kurzes Gespräch – denn genau dafür sind wir
+spezialisiert.
+
+ÜBER UNS
+--------
+{{ company.name }} ist ein spezialisierter Dienstleister für
+industrielle Laserreinigung im Raum {{ company.region }}. Wir entfernen
+Rost, Lacke, Beschichtungen und verbrannte Rückstände berührungslos,
+ohne Strahlmittel, ohne Säuren – und ohne das Grundmaterial anzugreifen.
+
+Was die Laserreinigung in der Praxis für Ihre Werkstatt bedeutet:
+✔ Kein Strahlmittel, keine Chemie, kein Säurestrip
+✔ Blechschonend – kein Verzug an dünnen Karosserie- und Oldtimerblechen
+✔ Trocken & rückstandsfrei – keine Nachreinigung der Werkstatt
+✔ Mobiler Einsatz vor Ort – auch direkt an der Hebebühne möglich
+
+UNVERBINDLICH UND KOSTENLOS
+---------------------------
+Sollte eines der oben genannten Themen für Sie relevant sein, freuen
+wir uns über eine kurze Rückmeldung. Wir bieten Ihnen an:
+
+→ Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)
+→ Eine kostenlose Probereinigung an einem konkreten Bauteil
+→ Ein transparentes Angebot innerhalb von 24 Stunden
+
+Sie erreichen uns jederzeit telefonisch oder per E-Mail.
+
+Mit freundlichen Grüßen,
+{{ sender.full_name }}
+{{ company.name }}
+
+Tel:   {{ sender.phone }}
+Mail:  {{ sender.email }}
+Web:   {{ company.website }}
+
+------=_LCF_BOUNDARY_001
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#f0f0f0;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0f0f0;">
+  <tr>
+    <td align="center" style="padding:30px 16px;">
+
+      <!-- ===== MAIN CARD ===== -->
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="background-color:#0E0E0E;padding:28px 40px 24px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="middle">
+                  <span style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;letter-spacing:4px;color:#ffffff;text-decoration:none;">LASER</span><span style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;letter-spacing:4px;color:#FF4B1F;text-decoration:none;">CLEANING</span>
+                  <br>
+                  <span style="font-family:Arial,sans-serif;font-size:10px;color:#666666;letter-spacing:3px;text-transform:uppercase;">Frankfurt</span>
+                </td>
+                <td valign="middle" align="right">
+                  <span style="font-family:Arial,sans-serif;font-size:10px;color:#555555;letter-spacing:1px;">Berührungslos&nbsp;·&nbsp;Chemikalienfrei&nbsp;·&nbsp;Präzise</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ORANGE ACCENT BAR -->
+        <tr>
+          <td style="background-color:#FF4B1F;height:3px;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td>
+        </tr>
+
+        <!-- INTRO BLOCK -->
+        <tr>
+          <td style="padding:36px 40px 18px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;mso-line-height-rule:exactly;">Kurze Anfrage</p>
+            <h1 style="font-family:Arial,sans-serif;font-size:22px;font-weight:bold;color:#1a1a1a;margin:0 0 24px 0;line-height:1.35;mso-line-height-rule:exactly;">Rost, Verkokung, Altlack —<br>wiederkehrende Aufgaben in Ihrer Werkstatt?</h1>
+
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">{% if recipient.salutation and recipient.last_name -%}
+Sehr geehrte{% if recipient.salutation == 'Herr' %}r{% endif %} {{ recipient.salutation }} {{ recipient.last_name }},
+{%- else -%}
+Sehr geehrte Damen und Herren,
+{%- endif %}</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              als Werkstatt kennen Sie die wiederkehrenden Aufgaben rund um Rost, verbrannte Rückstände und alte Beschichtungen vermutlich nur zu gut – und wissen auch, wie zeitintensiv und materialkritisch das klassische Sandstrahlen oder chemische Strippen sein kann.
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              Wir möchten Ihnen daher zunächst eine einfache Frage stellen:
+            </p>
+          </td>
+        </tr>
+
+        <!-- QUESTION BOX -->
+        <tr>
+          <td style="padding:0 40px 24px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:#f7f7f7;border-left:4px solid #FF4B1F;padding:22px 24px;">
+                  <p style="font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#1a1a1a;line-height:1.5;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+                    Treten an Fahrzeugen, die durch Ihre Werkstatt laufen, eine oder mehrere der folgenden Aufgaben regelmäßig auf?
+                  </p>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Rost</strong> an Karosserieblechen, Rahmen, Auspuffanlagen oder Bremsteilen</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Verkokung im Motor</strong> – Ansaugkrümmer, Ventile, Kolbenböden, Turbolader, AGR-Ventile</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Alter Lack & Unterbodenschutz</strong>, schonend zu entfernen ohne Verzug dünner Bleche</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Aufkleber & Folien</strong>, die rückstandsfrei und ohne Lackangriff abgelöst werden sollen</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Schweißnahtvorbereitung</strong> – blanke, oxidfreie Fügezonen ohne Strahlmittelreste</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Felgen & Bremssättel</strong>, schonend gereinigt – Alu, Stahl, Guss</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">•</span>&nbsp;&nbsp;<strong>Oldtimer-Restauration</strong> – materialschonend an empfindlichen Originalblechen</td></tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BRIDGE TO COMPANY -->
+        <tr>
+          <td style="padding:0 40px 24px 40px;">
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              Wenn auch nur eine dieser Aufgaben für Sie aktuell oder wiederkehrend ist, lohnt sich ein kurzes Gespräch – denn genau dafür sind wir spezialisiert.
+            </p>
+          </td>
+        </tr>
+
+        <!-- COMPANY INTRO -->
+        <tr>
+          <td style="padding:0 40px 18px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:24px 0 10px 0;mso-line-height-rule:exactly;">Über uns</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              <strong>{{ company.name }}</strong> ist ein spezialisierter Dienstleister für industrielle Laserreinigung im Raum {{ company.region }}. Wir entfernen Rost, Lacke, Beschichtungen und verbrannte Rückstände berührungslos, ohne Strahlmittel, ohne Säuren – und ohne das Grundmaterial anzugreifen.
+            </p>
+          </td>
+        </tr>
+
+        <!-- WHY LASER BOX -->
+        <tr>
+          <td style="padding:0 40px 28px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:#f7f7f7;border-left:4px solid #FF4B1F;padding:20px 24px;">
+                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px 0;mso-line-height-rule:exactly;">Was das für Ihre Werkstatt bedeutet</p>
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Kein Strahlmittel, keine Chemie, kein Säurestrip</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Blechschonend – kein Verzug an dünnen Karosserie- und Oldtimerblechen</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Trocken & rückstandsfrei – keine Nachreinigung der Werkstatt</td></tr>
+                    <tr><td style="font-family:Arial,sans-serif;font-size:13px;color:#333333;line-height:1.6;padding:3px 0;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">✔</span>&nbsp;&nbsp;Mobiler Einsatz vor Ort – auch direkt an der Hebebühne möglich</td></tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- OFFER -->
+        <tr>
+          <td style="padding:0 40px 28px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:#FF4B1F;letter-spacing:2px;text-transform:uppercase;margin:24px 0 10px 0;mso-line-height-rule:exactly;">Unverbindlich und kostenlos</p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 14px 0;mso-line-height-rule:exactly;">
+              Sollte eines der oben genannten Themen für Sie relevant sein, freuen wir uns über eine kurze Rückmeldung. Wir bieten Ihnen an:
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Ein unverbindliches Kennenlerngespräch (telefonisch oder vor Ort)</td></tr>
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Eine kostenlose Probereinigung an einem konkreten Bauteil</td></tr>
+              <tr><td style="font-family:Arial,sans-serif;font-size:14px;color:#333333;padding:4px 0;line-height:1.6;mso-line-height-rule:exactly;"><span style="color:#FF4B1F;font-weight:bold;">→</span>&nbsp;&nbsp;Ein transparentes Angebot innerhalb von 24 Stunden</td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- CTA BUTTON -->
+        <tr>
+          <td align="center" style="padding:0 40px 36px 40px;">
+            <!--[if mso]>
+            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Werkstatt" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="4%" stroke="f" fillcolor="#FF4B1F">
+              <w:anchorlock/>
+              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Jetzt unverbindlich anfragen</center>
+            </v:roundrect>
+            <![endif]-->
+            <!--[if !mso]><!-->
+            <a href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Werkstatt"
+               style="display:inline-block;background-color:#FF4B1F;color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:14px 36px;border-radius:3px;mso-hide:all;">
+              Jetzt unverbindlich anfragen
+            </a>
+            <!--<![endif]-->
+          </td>
+        </tr>
+
+        <!-- CLOSING -->
+        <tr>
+          <td style="padding:0 40px 36px 40px;border-top:1px solid #eeeeee;">
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:24px 0 6px 0;mso-line-height-rule:exactly;">
+              Sie erreichen uns jederzeit telefonisch oder per E-Mail – wir freuen uns auf Ihre Rückmeldung.
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#333333;line-height:1.65;margin:0 0 20px 0;mso-line-height-rule:exactly;">
+              Mit freundlichen Grüßen,
+            </p>
+            <p style="font-family:Arial,sans-serif;font-size:15px;color:#1a1a1a;line-height:1.65;margin:0;mso-line-height-rule:exactly;">
+              <strong>{{ sender.full_name }}</strong><br>
+              {{ company.name }}
+            </p>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="background-color:#0E0E0E;padding:22px 40px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="top">
+                  <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:bold;color:#ffffff;margin:0 0 6px 0;mso-line-height-rule:exactly;">{{ company.name }}</p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0 0 3px 0;mso-line-height-rule:exactly;">Tel: <a href="tel:{{ sender.phone | replace(' ', '') }}" style="color:#FF4B1F;text-decoration:none;">{{ sender.phone }}</a></p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0 0 3px 0;mso-line-height-rule:exactly;">E-Mail: <a href="mailto:{{ sender.email }}" style="color:#FF4B1F;text-decoration:none;">{{ sender.email }}</a></p>
+                  <p style="font-family:Arial,sans-serif;font-size:11px;color:#888888;margin:0;mso-line-height-rule:exactly;">Web: <a href="https://{{ company.website }}" style="color:#FF4B1F;text-decoration:none;">{{ company.website }}</a></p>
+                </td>
+                <td valign="top" align="right">
+                  <p style="font-family:Arial,sans-serif;font-size:10px;color:#555555;margin:0;line-height:1.6;mso-line-height-rule:exactly;text-align:right;">{{ company.region }}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+      <!-- END MAIN CARD -->
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+
+------=_LCF_BOUNDARY_001--
