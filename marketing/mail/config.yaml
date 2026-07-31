@@ -20,10 +20,34 @@ template:
   # Folder where rendered .eml files are saved. Relative to this config file
   # (or absolute). A relative --out is joined with this folder; an absolute
   # --out overrides it.
-  output_dir: "intro/ready"
+  output_dir: "intro/ready/Hausverwaltung"
 
 recipients:
   # Path to the recipients .yaml file, relative to this config file
   # (or absolute). Overridable from CLI via --recipients.
   # Switch this to e.g. "recipients_hv.yaml" to target a different campaign.
-  path: "recipients_hv.yaml"
+  path: "recipients_hv_batch2.yaml"
+
+# SMTP server used by --send. Password is read from env var SMTP_PASSWORD
+# (never put it here — this file is in git).
+smtp:
+  host: "smtp.ionos.de"
+  port: 587
+  security: "starttls"          # starttls | ssl | none
+  username: "info@laser-cleaning-ffm.de"
+  # Envelope-From header. Usually identical to sender.email above.
+  from_address: "info@laser-cleaning-ffm.de"
+
+# Anti-spam pacing for --send mode.
+send:
+  # Base delay between successive sends (seconds). Actual delay is
+  # interval_seconds * (1 ± jitter_pct/100) — slightly randomised so the
+  # cadence does not look bot-like.
+  interval_seconds: 75
+  jitter_pct: 20
+  # Hard cap on how many emails --send will dispatch per calendar day.
+  # When reached, the run stops and prints a hint; rerun the next day.
+  daily_limit: 30
+  # File where the daily counter is persisted between runs. Resets on UTC
+  # date change. Path is relative to this config file (or absolute).
+  state_file: ".send_state.json"

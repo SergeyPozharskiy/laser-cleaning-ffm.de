@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Render an .eml file from a Jinja2 template, config.yaml and recipients.yaml.
+"""Render (and optionally send) .eml files from a Jinja2 template,
+config.yaml and recipients.yaml.
 
 Template path is read from config.yaml (template.path); override with --template.
 Recipients path is read from config.yaml (recipients.path); override with
@@ -7,22 +8,44 @@ Recipients path is read from config.yaml (recipients.path); override with
 Output dir is config.yaml (template.output_dir); relative --out is joined under it.
 Output filename, if --out is omitted, is auto-derived from template + company name.
 
+Without --send the script only renders .eml files to disk (open them in a mail
+client and send manually). With --send the script also delivers each message
+via SMTP (settings under `smtp:` in config.yaml, password from env
+SMTP_PASSWORD or .env file), updates the recipient's `status` / `sent_at` in
+the recipients YAML, and paces sends with a configurable interval + jitter and
+a daily limit (see `send:` in config.yaml).
+
 Examples:
     python render_mail.py --recipient info@aventus-immo.de
     # -> intro/ready/hausverwaltung_vorstellung-Aventus-Immobilien.eml
 
     python render_mail.py --all-pending
     # renders one .eml per recipient whose status == 'pending'
+
+    python render_mail.py --all-pending --send
+    # renders AND sends, respecting interval + daily_limit, updates YAML
+
+    python render_mail.py --all-pending --send --dry-run
+    # like --send but does not actually connect to SMTP or touch YAML
 """
 from __future__ import annotations
 
 import argparse
+import json
+import os
+import random
+import smtplib
+import ssl
 import sys
+import time
+from datetime import datetime, timezone
+from email import message_from_string
 from email.utils import formataddr, formatdate
 from pathlib import Path
 
 import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined, Template, TemplateError
+from ruamel.yaml import YAML
 
 
 def load_yaml(path: Path) -> dict:
@@ -66,7 +89,8 @@ def render_one(
     company: dict,
     recipient: dict,
     out_path: Path,
-) -> None:
+) -> str:
+    """Render the template, write it to disk, and return the rendered text."""
     from_header = formataddr((company["name"], sender["email"]))
     to_display = recipient.get("company_name") or ""
     to_header = formataddr((to_display, recipient["email"]))
@@ -86,7 +110,135 @@ def render_one(
     # RFC 5322 mandates CRLF line endings.
     out_path.write_text(rendered, encoding="utf-8", newline="\r\n")
     print(f"Wrote {out_path}")
+    return rendered
 
+
+# ---------- SMTP send ------------------------------------------------------
+
+def load_dotenv(path: Path) -> None:
+    """Tiny `.env` loader — KEY=VALUE per line, ignores blanks and `#` lines.
+    Does not override variables already set in the real environment."""
+    if not path.is_file():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        os.environ.setdefault(key, value)
+
+
+def connect_smtp(smtp_cfg: dict, password: str) -> smtplib.SMTP:
+    host = smtp_cfg["host"]
+    port = int(smtp_cfg["port"])
+    security = (smtp_cfg.get("security") or "starttls").lower()
+    username = smtp_cfg["username"]
+
+    if security == "ssl":
+        client = smtplib.SMTP_SSL(host, port, context=ssl.create_default_context(), timeout=30)
+    else:
+        client = smtplib.SMTP(host, port, timeout=30)
+        client.ehlo()
+        if security == "starttls":
+            client.starttls(context=ssl.create_default_context())
+            client.ehlo()
+    client.login(username, password)
+    return client
+
+
+def send_via_smtp(
+    client: smtplib.SMTP,
+    rendered: str,
+    from_address: str,
+    to_address: str,
+) -> None:
+    msg = message_from_string(rendered)
+    client.send_message(msg, from_addr=from_address, to_addrs=[to_address])
+
+
+def _yaml_rt() -> YAML:
+    """Ruamel.yaml round-trip parser configured to match the on-disk style
+    of recipients*.yaml: 2-space mapping indent, list items indented 2 under
+    their key, quotes preserved, no line reflow, explicit `null` keyword."""
+    y = YAML()
+    y.preserve_quotes = True
+    y.width = 4096
+    y.indent(mapping=2, sequence=4, offset=2)
+    y.representer.add_representer(
+        type(None),
+        lambda r, _d: r.represent_scalar("tag:yaml.org,2002:null", "null"),
+    )
+    return y
+
+
+def mark_recipient_sent(recipients_path: Path, email: str) -> None:
+    """Update status=sent, sent_at=<ISO now> for `email` in the recipients YAML.
+    Uses ruamel.yaml so comments and key order in the file are preserved."""
+    yaml_rt = _yaml_rt()
+    with recipients_path.open("r", encoding="utf-8") as f:
+        doc = yaml_rt.load(f)
+
+    needle = email.lower()
+    now_iso = datetime.now().astimezone().isoformat(timespec="seconds")
+    for entry in doc["recipients"]:
+        if (entry.get("email") or "").lower() == needle:
+            entry["status"] = "sent"
+            entry["sent_at"] = now_iso
+            break
+    else:
+        raise RuntimeError(f"mark_recipient_sent: {email!r} not in {recipients_path}")
+
+    # newline="" → preserve the LF line endings ruamel.yaml emits, instead of
+    # letting Python translate to CRLF on Windows (the source file is LF).
+    with recipients_path.open("w", encoding="utf-8", newline="") as f:
+        yaml_rt.dump(doc, f)
+
+
+# ---------- Daily-limit state ---------------------------------------------
+
+class DailyCounter:
+    """Per-UTC-date send counter persisted to a small JSON file."""
+
+    def __init__(self, state_path: Path, limit: int) -> None:
+        self.path = state_path
+        self.limit = limit
+        self.today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        self.count = 0
+        if state_path.is_file():
+            try:
+                data = json.loads(state_path.read_text(encoding="utf-8"))
+                if data.get("date") == self.today:
+                    self.count = int(data.get("count") or 0)
+            except (json.JSONDecodeError, ValueError):
+                pass
+
+    def remaining(self) -> int:
+        return max(0, self.limit - self.count)
+
+    def reached(self) -> bool:
+        return self.count >= self.limit
+
+    def increment(self) -> None:
+        self.count += 1
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.write_text(
+            json.dumps({"date": self.today, "count": self.count}),
+            encoding="utf-8",
+        )
+
+
+def sleep_with_jitter(interval: float, jitter_pct: float) -> None:
+    if interval <= 0:
+        return
+    factor = 1.0 + random.uniform(-jitter_pct / 100.0, jitter_pct / 100.0)
+    delay = max(0.0, interval * factor)
+    print(f"  …sleeping {delay:.1f}s before next send")
+    time.sleep(delay)
+
+
+# ---------- main -----------------------------------------------------------
 
 def main() -> int:
     here = Path(__file__).parent
@@ -111,10 +263,20 @@ def main() -> int:
                    help="Path to recipients .yaml. "
                         "Defaults to config.recipients.path, then to "
                         "'recipients.yaml' next to the config file.")
+    p.add_argument("--send", action="store_true",
+                   help="After rendering, actually send each message over SMTP "
+                        "(see `smtp:` and `send:` in config.yaml). Updates "
+                        "status=sent / sent_at in the recipients YAML.")
+    p.add_argument("--dry-run", action="store_true",
+                   help="With --send: print what would be sent but skip the "
+                        "actual SMTP connection and YAML status update. "
+                        "No effect without --send.")
     args = p.parse_args()
 
     if args.all_pending and args.out is not None:
         raise SystemExit("--out cannot be combined with --all-pending")
+    if args.dry_run and not args.send:
+        raise SystemExit("--dry-run only makes sense together with --send")
 
     config = load_yaml(args.config)
 
@@ -158,23 +320,101 @@ def main() -> int:
     sender = config["sender"]
     company = config["company"]
 
+    # ----- SMTP / send-mode setup --------------------------------------
+    smtp_client: smtplib.SMTP | None = None
+    counter: DailyCounter | None = None
+    send_cfg: dict = config.get("send") or {}
+    smtp_cfg: dict = config.get("smtp") or {}
+    from_address = ""
+    if args.send:
+        if not smtp_cfg:
+            raise SystemExit("--send requires an `smtp:` section in config.yaml")
+        load_dotenv(args.config.parent / ".env")
+        password = os.environ.get("SMTP_PASSWORD") or ""
+        if not args.dry_run and not password:
+            raise SystemExit(
+                "--send requires SMTP_PASSWORD in env (or in .env next to "
+                "config.yaml). Copy .env.example to .env and fill it in."
+            )
+        from_address = smtp_cfg.get("from_address") or smtp_cfg.get("username") or sender["email"]
+
+        state_file = Path(send_cfg.get("state_file") or ".send_state.json")
+        if not state_file.is_absolute():
+            state_file = (args.config.parent / state_file).resolve()
+        daily_limit = int(send_cfg.get("daily_limit") or 0)
+        counter = DailyCounter(state_file, daily_limit) if daily_limit > 0 else None
+
+        if counter is not None and counter.reached():
+            print(
+                f"Daily limit reached ({counter.count}/{counter.limit}) for "
+                f"{counter.today}. Try again tomorrow, or raise send.daily_limit."
+            )
+            return 0
+
+        if not args.dry_run:
+            print(f"Connecting to {smtp_cfg['host']}:{smtp_cfg['port']} as {smtp_cfg['username']}…")
+            smtp_client = connect_smtp(smtp_cfg, password)
+
+    # ----- Render (and send) loop --------------------------------------
     env = Environment(
         loader=FileSystemLoader(template_path.parent),
         undefined=StrictUndefined,   # missing variable => loud failure, not silent ""
         keep_trailing_newline=True,
         autoescape=False,            # this is an email body, not a web page
     )
+
+    interval = float(send_cfg.get("interval_seconds") or 0)
+    jitter_pct = float(send_cfg.get("jitter_pct") or 0)
+    sent_count = 0
+    stopped_early = False
+
     try:
         tmpl = env.get_template(template_path.name)
-        for recipient in targets:
+        for i, recipient in enumerate(targets):
+            if args.send and counter is not None and counter.reached():
+                print(
+                    f"Daily limit hit ({counter.count}/{counter.limit}). "
+                    f"Stopping. Re-run tomorrow to continue."
+                )
+                stopped_early = True
+                break
+
             out_path = resolve_out_path(args.out, template_path, recipient, output_dir)
-            render_one(tmpl, sender, company, recipient, out_path)
+            rendered = render_one(tmpl, sender, company, recipient, out_path)
+
+            if args.send:
+                to_addr = recipient["email"]
+                if args.dry_run:
+                    print(f"  [dry-run] would send to {to_addr}")
+                else:
+                    if i > 0:
+                        sleep_with_jitter(interval, jitter_pct)
+                    assert smtp_client is not None
+                    send_via_smtp(smtp_client, rendered, from_address, to_addr)
+                    print(f"  Sent to {to_addr}")
+                    mark_recipient_sent(recipients_path, to_addr)
+                    if counter is not None:
+                        counter.increment()
+                sent_count += 1
     except TemplateError as e:
         print(f"Template error: {e}", file=sys.stderr)
         return 1
+    finally:
+        if smtp_client is not None:
+            try:
+                smtp_client.quit()
+            except smtplib.SMTPException:
+                pass
 
     if args.all_pending:
-        print(f"Rendered {len(targets)} email(s).")
+        print(f"Rendered {len(targets) if not stopped_early else sent_count} email(s).")
+    if args.send and not args.dry_run:
+        suffix = ""
+        if counter is not None:
+            suffix = f" — {counter.count}/{counter.limit} used today"
+        print(f"Sent {sent_count} email(s){suffix}.")
+    elif args.send and args.dry_run:
+        print(f"[dry-run] Would have sent {sent_count} email(s).")
     return 0
 
 

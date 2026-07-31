@@ -6,9 +6,11 @@
 
 ```
 marketing/mail/
-├── render_mail.py          # CLI-рендерер
-├── requirements.txt        # PyYAML, Jinja2
-├── config.yaml             # отправитель + путь к шаблону
+├── render_mail.py          # CLI-рендерер (+ опционально SMTP-отправка)
+├── requirements.txt        # PyYAML, Jinja2, ruamel.yaml
+├── config.yaml             # отправитель + шаблон + SMTP + лимиты
+├── .env.example            # шаблон файла с паролем SMTP (скопируй в .env)
+├── .send_state.json        # автогенерится: счётчик отправок за день
 ├── recipients.yaml         # список получателей
 ├── intro/
 │   └── templ/
@@ -65,6 +67,23 @@ recipients:
   # Перебивается флагом --recipients из CLI.
   # Меняй на "recipients_hv.yaml" и т.п. для другой кампании.
   path: "recipients.yaml"
+
+# Используется только в режиме --send. Пароль читается из переменной
+# окружения SMTP_PASSWORD (или из .env рядом с config.yaml). В YAML
+# его класть НЕЛЬЗЯ — файл в git.
+smtp:
+  host: "smtp.ionos.de"
+  port: 587
+  security: "starttls"           # starttls | ssl | none
+  username: "info@laser-cleaning-ffm.de"
+  from_address: "info@laser-cleaning-ffm.de"
+
+# Анти-спам параметры для --send.
+send:
+  interval_seconds: 60           # базовая пауза между письмами
+  jitter_pct: 20                 # ± случайный разброс ±20%
+  daily_limit: 30                # стоп после 30 писем в сутки (UTC)
+  state_file: ".send_state.json" # счётчик дня, сбрасывается на новой дате
 ```
 
 ### `recipients.yaml` — список получателей
@@ -126,6 +145,51 @@ python render_mail.py --all-pending
 
 Сгенерирует по одному `.eml` для каждого получателя со `status: pending` в активном файле получателей (берётся из `config.recipients.path`). Имена файлов автогенерируются (`--out` в этом режиме недопустим).
 
+### Автоматическая отправка через SMTP (`--send`)
+
+Без `--send` скрипт только рендерит `.eml` — отправлять надо руками из почтового клиента. С `--send` он отрендерит файл (как раньше — для аудита) **и** отправит письмо через SMTP, обновит `status: sent` и `sent_at: <ISO timestamp>` в YAML получателей.
+
+**Первая настройка (один раз):**
+
+1. Скопируй `.env.example` в `.env` (рядом с `config.yaml`):
+   ```powershell
+   cp .env.example .env
+   ```
+2. Вставь в `.env` пароль от ящика `info@laser-cleaning-ffm.de`:
+   ```
+   SMTP_PASSWORD=твой_пароль
+   ```
+   `.env` уже в `.gitignore` — в коммит не уйдёт.
+3. Проверь SMTP-настройки в `config.yaml` (`smtp:` секция). По умолчанию — IONOS (`smtp.ionos.de:587`, STARTTLS).
+
+**Запуск:**
+
+```powershell
+# Сухой прогон — рендерит .eml, печатает "would send", но НЕ коннектится
+# к SMTP и НЕ трогает recipients.yaml. Хорошо для предпросмотра.
+python render_mail.py --all-pending --send --dry-run
+
+# Боевой режим
+python render_mail.py --all-pending --send
+```
+
+Что произойдёт в боевом режиме:
+
+1. Скрипт коннектится к SMTP-серверу.
+2. Для каждого `pending`-получателя:
+   - рендерит `.eml` в `output_dir`;
+   - отправляет через SMTP;
+   - **сразу** записывает `status: sent` + `sent_at` в `recipients.yaml` (чтобы при Ctrl+C/падении не было путаницы);
+   - инкрементит дневной счётчик в `.send_state.json`;
+   - спит `interval_seconds ± jitter_pct%` перед следующим письмом (по умолчанию 60 сек ±20%).
+3. По достижении `daily_limit` (по умолчанию 30) — стопается. Запусти на следующий день, продолжит с того места.
+
+**Сбросить дневной счётчик** (например, если ты случайно превысил, а тебе надо ещё): удали `marketing/mail/.send_state.json`.
+
+**Переотправить уже отправленное письмо:** поменяй в `recipients.yaml` `status: sent` → `status: pending` и запусти `--all-pending --send`. Либо отправь конкретному `--recipient ...@... --send` — статус игнорируется в этом режиме (но всё равно обновится).
+
+**SMTP не подключился / 535 auth failed:** проверь `SMTP_PASSWORD`, имя ящика в `smtp.username`, и что у IONOS включена SMTP-отправка для этого ящика.
+
 ### Аргументы
 
 | Аргумент | Обязательный | Описание |
@@ -136,6 +200,8 @@ python render_mail.py --all-pending
 | `--template` | нет | путь к `.eml`-шаблону. По умолчанию — `template.path` из `config.yaml` |
 | `--config` | нет | путь к `config.yaml` (по умолчанию рядом со скриптом) |
 | `--recipients` | нет | путь к файлу получателей. По умолчанию — `recipients.path` из `config.yaml`, иначе `recipients.yaml` рядом с конфигом |
+| `--send` | нет | после рендера ещё и отправить через SMTP, обновить `status`/`sent_at` в YAML, учитывать `daily_limit` и интервал. Требует `SMTP_PASSWORD` в env/.env |
+| `--dry-run` | нет | только с `--send`: рендерит и печатает «would send to …», но не коннектится к SMTP и не трогает YAML |
 
 ## Типичные ошибки
 
@@ -143,8 +209,11 @@ python render_mail.py --all-pending
 |---|---|---|
 | `Recipient '...' not found in recipients file` | email не найден в `recipients.yaml` | проверь написание, добавь получателя |
 | `'recipient' is undefined` (или похожее) | в шаблоне используется поле, которого нет в YAML | добавь поле в `recipients.yaml` или `config.yaml` |
-| `ModuleNotFoundError: No module named 'yaml'` | не установлены зависимости | `python -m pip install -r requirements.txt` |
+| `ModuleNotFoundError: No module named 'yaml'` / `'ruamel'` | не установлены зависимости | `python -m pip install -r requirements.txt` |
 | `TemplateSyntaxError` | сломан Jinja2-синтаксис в шаблоне | проверь парность `{% ... %}` и `{{ ... }}` |
+| `--send requires SMTP_PASSWORD in env` | пароль не выставлен | скопируй `.env.example` в `.env` и впиши пароль |
+| `Daily limit reached (30/30)` | за сутки уже отправлено 30 писем | подожди следующих суток, или подними `send.daily_limit`, или удали `.send_state.json` (на свой страх и риск) |
+| `smtplib.SMTPAuthenticationError: 535` | неверный логин/пароль или SMTP для ящика выключен у провайдера | проверь `smtp.username` и `SMTP_PASSWORD`, в админке IONOS включи SMTP |
 
 ## Создание нового шаблона
 
