@@ -218,13 +218,13 @@ Sehr geehrte Damen und Herren,
             <!--[if mso]>
             <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Liegenschaft" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="4%" stroke="f" fillcolor="#FF4B1F">
               <w:anchorlock/>
-              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Jetzt unverbindlich anfragen</center>
+              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">Unverbindlich anfragen</center>
             </v:roundrect>
             <![endif]-->
             <!--[if !mso]><!-->
             <a href="mailto:{{ sender.email }}?subject=Anfrage%20Laserreinigung%20Liegenschaft"
                style="display:inline-block;background-color:#FF4B1F;color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:14px 36px;border-radius:3px;mso-hide:all;">
-              Jetzt unverbindlich anfragen
+              Unverbindlich anfragen
             </a>
             <!--<![endif]-->
           </td>
