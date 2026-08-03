@@ -38,13 +38,26 @@ smtp:
   # Envelope-From header. Usually identical to sender.email above.
   from_address: "info@laser-cleaning-ffm.de"
 
+# IMAP server used by --send to drop a copy of each sent message into the
+# mailbox's Sent folder (so it shows up in your webmail / mail client).
+# Remove this whole section to disable saving copies. Password is reused from
+# SMTP_PASSWORD unless a separate IMAP_PASSWORD env var is set.
+imap:
+  host: "imap.ionos.de"
+  port: 993
+  security: "ssl"               # ssl | starttls | none
+  username: "info@laser-cleaning-ffm.de"
+  # Name of the Sent folder on the server. IONOS uses "Sent"; some servers
+  # localise it (e.g. "Gesendet", "Sent Items", "INBOX.Sent").
+  sent_folder: "Gesendete Objekte"
+
 # Anti-spam pacing for --send mode.
 send:
   # Base delay between successive sends (seconds). Actual delay is
   # interval_seconds * (1 ± jitter_pct/100) — slightly randomised so the
   # cadence does not look bot-like.
-  interval_seconds: 75
-  jitter_pct: 20
+  interval_seconds: 120
+  jitter_pct: 30
   # Hard cap on how many emails --send will dispatch per calendar day.
   # When reached, the run stops and prints a hint; rerun the next day.
   daily_limit: 30

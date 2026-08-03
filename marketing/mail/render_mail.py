@@ -31,6 +31,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
+import imaplib
 import json
 import os
 import random
@@ -39,7 +40,7 @@ import ssl
 import sys
 import time
 from datetime import datetime, timezone
-from email import message_from_string
+from email import message_from_bytes
 from email.utils import formataddr, formatdate
 from pathlib import Path
 
@@ -154,8 +155,168 @@ def send_via_smtp(
     from_address: str,
     to_address: str,
 ) -> None:
-    msg = message_from_string(rendered)
+    # Parse from BYTES, not str: the template body is 8-bit UTF-8 (ä ö ü ß …).
+    # message_from_bytes decodes non-ASCII via surrogateescape so the BytesGenerator
+    # inside send_message can round-trip it back to the original UTF-8 bytes. Parsing
+    # from a str would keep genuine code points and raise UnicodeEncodeError on send.
+    msg = message_from_bytes(rendered.encode("utf-8"))
     client.send_message(msg, from_addr=from_address, to_addrs=[to_address])
+
+
+def _is_disconnect(exc: Exception) -> bool:
+    """True for errors that mean 'the session died', not 'the mail was rejected'.
+    IONOS reports an idle-timed-out session as a 421 on the next command, which
+    smtplib surfaces as SMTPSenderRefused(421, …) rather than a disconnect."""
+    if isinstance(exc, (smtplib.SMTPServerDisconnected, smtplib.SMTPConnectError)):
+        return True
+    if isinstance(exc, smtplib.SMTPResponseException):
+        return exc.smtp_code in (421, 451)
+    return isinstance(exc, OSError)
+
+
+# ---------- IMAP: save a copy to the Sent folder ---------------------------
+
+def connect_imap(imap_cfg: dict, password: str) -> imaplib.IMAP4:
+    host = imap_cfg["host"]
+    port = int(imap_cfg.get("port") or 993)
+    security = (imap_cfg.get("security") or "ssl").lower()
+    username = imap_cfg["username"]
+
+    if security == "ssl":
+        client: imaplib.IMAP4 = imaplib.IMAP4_SSL(
+            host, port, ssl_context=ssl.create_default_context()
+        )
+    else:
+        client = imaplib.IMAP4(host, port)
+        if security == "starttls":
+            client.starttls(ssl.create_default_context())
+    client.login(username, password)
+    return client
+
+
+def _imap_quote_mailbox(name: str) -> str:
+    """Wrap a mailbox name in an IMAP quoted-string so names containing spaces
+    (e.g. "Gesendete Objekte") are not misparsed as two arguments. imaplib does
+    not quote mailbox names itself."""
+    escaped = name.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
+
+
+def append_to_sent(client: imaplib.IMAP4, rendered: str, sent_folder: str) -> None:
+    """APPEND the rendered message to the IMAP Sent folder, flagged \\Seen so
+    it does not show up as unread. Line endings are normalised to CRLF as
+    RFC 3501/5322 require."""
+    crlf = rendered.replace("\r\n", "\n").replace("\n", "\r\n")
+    msg_bytes = crlf.encode("utf-8")
+    date_time = imaplib.Time2Internaldate(time.time())
+    typ, data = client.append(
+        _imap_quote_mailbox(sent_folder), r"(\Seen)", date_time, msg_bytes
+    )
+    if typ != "OK":
+        raise imaplib.IMAP4.error(f"APPEND to {sent_folder!r} failed: {typ} {data!r}")
+
+
+# ---------- connection management -----------------------------------------
+
+class Mailer:
+    """Lazily-opened SMTP + optional IMAP connections.
+
+    A single connection cannot be held across the pacing interval: IONOS closes
+    sessions that sit idle for ~2 minutes and answers the next command with
+    `421 … command timeout`. So `close()` is called before every sleep and the
+    connections are re-opened on demand for the next message."""
+
+    def __init__(
+        self,
+        smtp_cfg: dict,
+        imap_cfg: dict,
+        password: str,
+        imap_password: str,
+        sent_folder: str,
+    ) -> None:
+        self.smtp_cfg = smtp_cfg
+        self.imap_cfg = imap_cfg
+        self.password = password
+        self.imap_password = imap_password
+        self.sent_folder = sent_folder
+        self._smtp: smtplib.SMTP | None = None
+        self._imap: imaplib.IMAP4 | None = None
+
+    def smtp(self) -> smtplib.SMTP:
+        if self._smtp is None:
+            print(
+                f"Connecting to {self.smtp_cfg['host']}:{self.smtp_cfg['port']} "
+                f"as {self.smtp_cfg['username']}…"
+            )
+            self._smtp = connect_smtp(self.smtp_cfg, self.password)
+        return self._smtp
+
+    def imap(self) -> imaplib.IMAP4 | None:
+        if not self.imap_cfg:
+            return None
+        if self._imap is None:
+            print(
+                f"Connecting to IMAP {self.imap_cfg['host']}:"
+                f"{self.imap_cfg.get('port') or 993} to save copies in "
+                f"{self.sent_folder!r}…"
+            )
+            try:
+                self._imap = connect_imap(self.imap_cfg, self.imap_password)
+            except (imaplib.IMAP4.error, OSError, ssl.SSLError) as e:
+                print(
+                    f"  ! IMAP connection failed ({e}). Continuing without "
+                    f"saving a copy to {self.sent_folder!r}.",
+                    file=sys.stderr,
+                )
+                self._imap = None
+        return self._imap
+
+    def send(self, rendered: str, from_address: str, to_address: str) -> None:
+        """Send, and on a dead session reconnect once and try again."""
+        try:
+            send_via_smtp(self.smtp(), rendered, from_address, to_address)
+        except (smtplib.SMTPException, OSError) as e:
+            if not _is_disconnect(e):
+                raise
+            print(f"  ! SMTP session lost ({e}). Reconnecting…", file=sys.stderr)
+            self._close_smtp()
+            send_via_smtp(self.smtp(), rendered, from_address, to_address)
+
+    def save_copy(self, rendered: str) -> None:
+        client = self.imap()
+        if client is None:
+            return
+        try:
+            append_to_sent(client, rendered, self.sent_folder)
+        except (imaplib.IMAP4.error, OSError, ssl.SSLError) as e:
+            print(
+                f"  ! Could not save copy to {self.sent_folder!r} ({e}). "
+                f"Mail was still sent.",
+                file=sys.stderr,
+            )
+            self._close_imap()
+            return
+        print(f"  Saved copy to {self.sent_folder!r}")
+
+    def _close_smtp(self) -> None:
+        if self._smtp is not None:
+            try:
+                self._smtp.quit()
+            except (smtplib.SMTPException, OSError):
+                pass
+            self._smtp = None
+
+    def _close_imap(self) -> None:
+        if self._imap is not None:
+            try:
+                self._imap.logout()
+            except (imaplib.IMAP4.error, OSError, ssl.SSLError):
+                pass
+            self._imap = None
+
+    def close(self) -> None:
+        self._close_smtp()
+        self._close_imap()
 
 
 def _yaml_rt() -> YAML:
@@ -321,10 +482,12 @@ def main() -> int:
     company = config["company"]
 
     # ----- SMTP / send-mode setup --------------------------------------
-    smtp_client: smtplib.SMTP | None = None
+    mailer: Mailer | None = None
     counter: DailyCounter | None = None
     send_cfg: dict = config.get("send") or {}
     smtp_cfg: dict = config.get("smtp") or {}
+    imap_cfg: dict = config.get("imap") or {}
+    sent_folder = imap_cfg.get("sent_folder") or "Sent"
     from_address = ""
     if args.send:
         if not smtp_cfg:
@@ -352,8 +515,15 @@ def main() -> int:
             return 0
 
         if not args.dry_run:
-            print(f"Connecting to {smtp_cfg['host']}:{smtp_cfg['port']} as {smtp_cfg['username']}…")
-            smtp_client = connect_smtp(smtp_cfg, password)
+            # Connections are opened on first use and dropped again before each
+            # pacing sleep — see Mailer.
+            mailer = Mailer(
+                smtp_cfg,
+                imap_cfg,
+                password,
+                os.environ.get("IMAP_PASSWORD") or password,
+                sent_folder,
+            )
 
     # ----- Render (and send) loop --------------------------------------
     env = Environment(
@@ -387,11 +557,15 @@ def main() -> int:
                 if args.dry_run:
                     print(f"  [dry-run] would send to {to_addr}")
                 else:
+                    assert mailer is not None
                     if i > 0:
+                        # Hang up first: the server drops idle sessions during
+                        # the pause and answers the next command with 421.
+                        mailer.close()
                         sleep_with_jitter(interval, jitter_pct)
-                    assert smtp_client is not None
-                    send_via_smtp(smtp_client, rendered, from_address, to_addr)
+                    mailer.send(rendered, from_address, to_addr)
                     print(f"  Sent to {to_addr}")
+                    mailer.save_copy(rendered)
                     mark_recipient_sent(recipients_path, to_addr)
                     if counter is not None:
                         counter.increment()
@@ -400,11 +574,8 @@ def main() -> int:
         print(f"Template error: {e}", file=sys.stderr)
         return 1
     finally:
-        if smtp_client is not None:
-            try:
-                smtp_client.quit()
-            except smtplib.SMTPException:
-                pass
+        if mailer is not None:
+            mailer.close()
 
     if args.all_pending:
         print(f"Rendered {len(targets) if not stopped_early else sent_count} email(s).")
