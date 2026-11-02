@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JJFDP44RT"></script>
@@ -247,8 +247,8 @@
       <li><a href="#contact" data-key="nav_contact">Contact</a></li>
     </ul>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
     </div>
     <button class="nav-cta" data-key="nav_quote" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
   </div>
@@ -625,6 +625,7 @@
   <p data-key="footer_copy">© 2026 LaserCleaning. All rights reserved.</p>
   <p>Frankfurt, Germany</p>
   <a href="impressum.html" data-key="footer_impressum">Imprint</a>
+  <a href="datenschutz.html" data-key="footer_privacy">Privacy Policy</a>
 </footer>
 
 <script>
@@ -671,7 +672,7 @@ const translations = {
     cert_verify:"Request Documents",
     cta_label:"Get Started",cta_h2_html:"Ready to Restore<br>Your Surfaces?",
     cta_p:"Request a free on-site assessment. We'll evaluate the job and provide a transparent quote within 24 hours.",
-    cta_btn:"Request Free Assessment",footer_copy:"© 2026 LaserCleaning. All rights reserved.",footer_impressum:"Imprint",areas_label:"Service Areas",areas_title:"Laser Cleaning Across Hessen",areas_sub:"We serve clients throughout the Frankfurt Rhine-Main region and all of Hessen.",
+    cta_btn:"Request Free Assessment",footer_copy:"© 2026 LaserCleaning. All rights reserved.",footer_impressum:"Imprint",footer_privacy:"Privacy Policy",areas_label:"Service Areas",areas_title:"Laser Cleaning Across Hessen",areas_sub:"We serve clients throughout the Frankfurt Rhine-Main region and all of Hessen.",
     contact_label:"Contact",contact_title:"Get In Touch",
     contact_email_label:"Email",contact_phone_label:"Phone",contact_location_label:"Location",
     form_name_label:"Name",form_name_placeholder:"Your name",
@@ -723,7 +724,7 @@ const translations = {
     cert_verify:"Dokumente anfordern",
     cta_label:"Jetzt starten",cta_h2_html:"Bereit für makellose<br>Oberflächen?",
     cta_p:"Fordern Sie eine kostenlose Vor-Ort-Bewertung an. Wir prüfen den Auftrag und liefern innerhalb von 24 Stunden ein transparentes Angebot.",
-    cta_btn:"Kostenlose Bewertung anfragen",footer_copy:"© 2026 LaserCleaning. Alle Rechte vorbehalten.",footer_impressum:"Impressum",areas_label:"Einsatzgebiete",areas_title:"Laserreinigung in ganz Hessen",areas_sub:"Wir bedienen Kunden in der gesamten Metropolregion Frankfurt Rhein-Main und in ganz Hessen.",
+    cta_btn:"Kostenlose Bewertung anfragen",footer_copy:"© 2026 LaserCleaning. Alle Rechte vorbehalten.",footer_impressum:"Impressum",footer_privacy:"Datenschutz",areas_label:"Einsatzgebiete",areas_title:"Laserreinigung in ganz Hessen",areas_sub:"Wir bedienen Kunden in der gesamten Metropolregion Frankfurt Rhein-Main und in ganz Hessen.",
     contact_label:"Kontakt",contact_title:"Kontaktieren Sie uns",
     contact_email_label:"E-Mail",contact_phone_label:"Telefon",contact_location_label:"Standort",
     form_name_label:"Name",form_name_placeholder:"Ihr Name",
@@ -752,7 +753,15 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
   document.documentElement.lang = lang;
+  try { localStorage.setItem('lc_lang', lang); } catch (e) {}
 }
+
+(function initLang() {
+  var lang = 'de';
+  try { lang = localStorage.getItem('lc_lang') || 'de'; } catch (e) {}
+  if (!translations[lang]) lang = 'de';
+  setLang(lang);
+})();
 
 document.querySelectorAll('.ba-wrap').forEach(function(wrap) {
   var before  = wrap.querySelector('.ba-before');
